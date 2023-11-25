@@ -1,0 +1,4 @@
+.split_border{
+    color: var( --border_color);
+    border: 4px;
+}

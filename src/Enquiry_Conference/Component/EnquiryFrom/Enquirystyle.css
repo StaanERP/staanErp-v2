@@ -1,0 +1,426 @@
+
+.wrap{
+ 
+  width: 100%;
+  height: 90%; 
+  overflow-x: hidden;
+}
+
+.header{
+    text-align: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  
+  }
+   /* .header img{
+      height: 20%;
+      width: 20%;
+      margin-top: 15px;
+      border: 1px solid #ffff;
+      justify-content: flex-start;
+  } */
+  .header .title{
+    flex: 3;
+    padding-right: 10%;
+  }
+  
+ 
+  .title{ 
+    position: relative;
+    color: rgb(85, 85, 85);
+    font-weight: 600;
+  }
+  .title::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffff;
+     animation: showRing 2s ease   forwards;
+     animation-delay: 0.1s
+  }
+  
+  .loginDiv{
+    max-width: 650px; 
+  }
+  .container-md{
+     max-width: 700px; 
+  }
+  .container-sm {
+  
+     
+    background: #ffff;
+    border-radius: 2%;
+  } 
+  .enquiry_from{
+     
+    margin-top: 10%;
+    border: black 2px solid;
+    border-radius: 3%;
+    text-align: center;
+    justify-content: center;
+  
+  } 
+   .title-sub{
+    color: rgb(255 153 0);
+  }
+  .input-lable{
+    position: relative;
+    height: 10%;
+    margin: 5px 0;
+     
+  }
+  .input-lable label{
+     position: absolute;
+     top: 20%;
+     left: 10px;
+     transform: translateY(-50%);
+     color: #003049;
+     pointer-events: none;
+  }
+  .input-lable .input-trenprant{
+    color: black;
+     background: transparent;
+  }
+  .input-lable input:focus~label{
+    top:-10px;
+    margin-bottom: 10px;
+  }
+  .input-lable input:not(:placeholder-shown) ~ label {
+    top: -10px;
+    margin-bottom: 10px;
+  }
+   
+  .Intreseted-lable-sub-prant {
+    display: flex; 
+    align-items: flex-end;
+    justify-content:  center;  
+     
+    height: 40px;
+  } 
+   
+   .Intreseted-lable-sub{
+   color: #003049;
+   font-weight: 600;
+   
+  
+  } 
+  
+  .icons_of_product{
+    position:relative;
+    justify-content: space-around;
+     display: flex;
+     flex-wrap:nowrap;
+     height: 12rem;
+     width: 100%; 
+   
+  } 
+   
+  
+  
+  
+    .img_1{
+    background: url('../../../img/ot Table.png') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform 0.3s ease;
+    
+  }
+  .img_2{
+    background: url('https://www.staan.in/wp-content/uploads/2016/09/discover-1-1-540x340.jpg') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform 0.3s ease;
+   
+  }
+  .img_3{
+    background: url('../../../img/Anesthesia.png') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform 0.3s ease;
+  }
+  .img_4{
+    background: url('../../../img/Critical care devices.png') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform 0.3s ease;
+  }
+  .img_5{
+    background: url('../../../img/Anesthesia.png') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform 0.3s ease;
+  }
+  
+  
+  
+  .img_6{
+    background: url('../../../img/Surgical Instrument.png') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform 0.3s ease;
+  }
+  .img_7{
+    background: url('../../../img/others.png') ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform 0.3s ease;
+  }   
+   
+  
+   .input-trenprant{
+    
+    border: none;
+    border-bottom: 1px solid #000;  
+    outline: none;
+    background-color: transparent;
+  } 
+   
+ 
+  
+   .comman_circle {
+    position: relative;
+    width: 200px;
+    height: 200px; 
+    border-radius: 50%; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform 0.3s ease;
+  }
+  .SwiperSlideComman_circle{
+ 
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
+ 
+  
+
+  .comman_circle input[type="checkbox"]:checked + .product_name {
+ 
+    color: #29bffe;
+  }
+ 
+  .error-border{
+    border: 2px solid red;
+  }
+  
+  small{
+    color: red;
+  } 
+  
+   .product_name{
+    position: absolute;
+    top: 110px;
+    transform: translateX(20%);  
+    z-index: 10;
+    text-wrap: wrap; 
+    
+  } 
+  .custom-swiper .swiper-pagination {
+    position: absolute !important;
+    margin-top: 0% !important;
+  }
+  /* .product_name {
+    position: absolute;
+    bottom: -10px;  
+    left: 45%;  
+    transform: translateX(-50%);  
+    
+    text-wrap:nowrap;
+    text-align: center; 
+  } */
+  
+  .intrested_error{
+    position: absolute;
+    bottom: -50px;
+  }
+  .enquiry_submit_button{
+    background: linear-gradient(#29bffe,rgb(1, 81, 255));
+    color: #ffff;
+    font-weight: 500;
+    width: 40%;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-end-end-radius: 20px;
+      border-end-start-radius: 20px;
+      border-start-end-radius: 20px;
+      border-start-start-radius: 20px;
+       outline: none;
+       
+  }
+  
+  .enquiry_submit_button:hover{
+    
+   
+    color: #ffff;
+    background: linear-gradient(rgb(1, 81, 255), #29bffe);
+    
+  }
+  .submit_button_wrao{
+    text-align: center;
+  }
+  
+  .bottomborder{
+    border: "none";
+    outline: "none";
+    border-radius: '0px';
+    border-radius: '1px solid black';
+   }
+   
+  .border-animation{
+    background: repeating-conic-gradient(#ff2770 0%, #ff2770 5%, #ff2770 15% , #ff2770 40% );
+  }
+  
+   
+  .export_button{
+    align-items: center;
+    padding: 10px;
+    margin: 0;
+    background: #f8f8f8;
+    display: flex;
+  }
+  
+  .loginpage{
+    position: relative;
+    top: 50%;
+  } 
+  
+  /* animations  */
+  
+  @keyframes showRing {
+    100%{
+      width: 0%;
+    }
+    
+  }
+  
+  
+  
+  @media (min-width: 768px) {
+    .comman_circle {
+      width: 100px;  
+      height: 100px;  
+    }
+    .header img{
+      margin-left: 23px;
+  }
+  .header .title{
+     
+    padding-right: 20%;
+  }
+  }
+  
+  @media (max-width: 768px) {
+    .comman_circle {
+      
+      width: 100px;  
+      height: 100px;  
+    }
+    .header img{
+       margin-left: 10px;
+       margin-top: 0px;
+    
+  }
+  
+  
+  }
+   
+  
+  @media (max-width: 576px) {
+    .comman_circle {
+    
+      width: 100px; 
+      height: 100px;
+    }
+    /* .container-sm {
+  
+    
+      background: #ffff;
+      border-radius: 2%;
+    } */
+    .header{
+      display: block;
+      
+      margin: 0 auto;
+      
+    
+    }
+    .header img{
+      margin-top: 0px;
+      height: 30%;
+      width: 30%; 
+    }
+    
+    .header .title{
+      flex: 3;
+      padding-right: 0%;
+    }
+    .comman_circle {
+      position: relative;
+      width: 90px;
+      height: 90px;
+    }
+    .SwiperSlideComman_circle{
+      padding-left: 0%;
+      padding-right: 0%;
+    }
+   
+  }
+  
+  @media (max-width: 375px) {
+ 
+     .header{
+       margin:auto;
+       margin-left: 0%;
+       
+     }
+      .header img{
+        margin-top: 0px;
+        margin-left: 0%;
+        height: 30%;
+        width: 30%; 
+  }     
+  .intrested_error{
+    margin-left: 55%;
+  }
+  
+  .product_name {
+     padding-top: 20px;
+    bottom: -70px;   
+   
+  }
+      .enquiry_submit_button{
+        
+        margin-left: 25%;
+      }
+      .SwiperSlideComman_circle{
+        padding-left: 0%;
+        padding-right: 0%;
+      }
+      .comman_circle {
+        position: relative;
+        margin: 0px;
+        
+        width: 70px;
+        height: 70px;
+      }
+      .custom-swiper .swiper-pagination {
+        
+        margin-top: 5% !important;
+      }
+  }
+   
+   
