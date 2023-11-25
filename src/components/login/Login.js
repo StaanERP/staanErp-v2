@@ -10,7 +10,7 @@ import DataContext from '../../context/ItemMasterContext';
 
 
 const Login = () => {
-  const {login, logout}= useContext(DataContext)
+  const {login, logout, userName}= useContext(DataContext)
     const navigate = useNavigate();
     const initialValueslogin ={
         "email": "",
@@ -72,45 +72,14 @@ const Login = () => {
          <div className='header'>
          <img src={staanlogo} className="img-thumbnail" alt="staan logo"/>
          <ToastContainer/>
-         <h3 className="title pt-md-4">Login FORM </h3>
+         <h3 className="title pt-md-4">{userName ?  "Hi  " + userName : "Need To Login"}</h3>
          </div>
-        
-           <Formik   initialValues=  {initialValueslogin}
-             onSubmit={handleSubmit} >
-               {({errors, touched, isSubmitting})=>
-               
-               (  
-                  <Form   > 
-               <div className="row mt-md-5 mx-md-3">
-                   
-                   <div className="col-12 col-md-12     text-start mt-md-2  ">
-                   <label htmlFor="email" className='form-label lable-sub  pt-2 ps-1'>Email  </label>
-                   <Field type='email' name='email'  placeholder=' ' className='w-100  input-trenprant'/>
-                   
-                   <br/>
-                   {  touched.email && errors.email && <small>{errors.email}</small>}
-                   
-                   </div>
-                  
-                   <div className="col-12   col-md-12    text-start  mt-md-2    ">
-                     <label htmlFor="password" className='form-label pt-2 ps-1 lable-sub   '>Password</label>
-                     <Field type='password' name='password'  placeholder=' ' className='w-100 input-trenprant'/>
-                    
-                     <br/>
-                     {  touched.password && errors.password && <small>{errors.password}</small>}
-                   </div>
-                   
-                  
-               </div>
-                  
-               <div className="submit_button_wrao">
-               <button type="submit" className="btn shadow-sm  enquiry_submit_button" onClick={login} >Login</button>
-               {/* <button onClick={logout}>logout</button> */}
-               </div>
-              
-               </Form>) }
-             
-           </Formik>
+         <div className="row">
+          <div className="col-12 text-center">
+          <button type="submit" className="btn shadow-sm  enquiry_submit_button" onClick={login} >Login</button>
+          </div>
+         </div>
+      
        </div>
     </>
   )
