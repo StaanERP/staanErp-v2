@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-
+ 
 import axiosInstance from "../api/axoiss";
 import {BASE_URL} from "../ApiDomain"
 import {initializeMsal} from "../msalUtils"
@@ -121,7 +121,7 @@ export const DataProvider = ({children})=>{
       const callApi = async (token) => {
       
         try {
-          const response = await fetch('http://127.0.0.1:8000/user', {
+          const response = await fetch(`${BASE_URL}/user`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
