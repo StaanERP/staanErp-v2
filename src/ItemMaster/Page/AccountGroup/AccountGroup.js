@@ -37,8 +37,7 @@ const AccountGroup = () => {
         resizable: true,
       };
       const url = "/itemmaster/AccountsGroup"
-      
-   let itemId;
+      const itemId = ""    
 
    const deleteButton = ({ value, data }) => {
      itemId = data.id; // Assign the value to the higher-scoped itemId

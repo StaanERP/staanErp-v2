@@ -105,3 +105,13 @@ export const StoreSchema = yup.object().shape({
     StoreAccount : yup.string().required('Pls Enter Account'),
     StoreInCharge :   yup.string().required('Pls Select InCharge')
 })
+
+
+export const StockSchema  = yup.object().shape({
+    part_no : yup.string().required('Pls Select Code'),
+    part_name : yup.string().required('Pls Select Name'),
+    store :   yup.string().required('Pls Select Store'),
+    qty: yup.string()
+    .matches(/^[-+]?[0-9]*\.?[0-9]+$/, 'Enter a valid numeric value for Qty')
+    .required('Qty is required'),
+})

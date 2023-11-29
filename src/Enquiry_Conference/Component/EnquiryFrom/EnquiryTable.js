@@ -8,13 +8,13 @@ import { SideNavbar } from '../../../components/sideNavbar/SideNavbar';
 import { useNavigate } from 'react-router-dom';
 
 const EnquiryTable = () => {
-    const {enquiry, userId} = useContext(DataContext)
+    const {enquiry,   conferenct} = useContext(DataContext)
     const navigate = useNavigate();
     const [post, setPost] =  useState('')
     useEffect(()=>{
        
         setPost(enquiry)
-        console.log(enquiry);
+        // console.log(enquiry);
     },[enquiry])
 
     // const 
@@ -37,20 +37,7 @@ const EnquiryTable = () => {
         //       }
       
               // Fetch data for 'intrested_products'
-              // let intrestedProductsData = [];
-              // if (intersted_id && intersted_id.length > 0) {
-              //   intrestedProductsData = await Promise.all(
-              //     intersted_id.map(async (productId) => {
-              //       try {
-              //         const response = await axiosInstance.get(`/api/product/${productId}`);
-              //         return response.data.Name; // Assuming response.data contains the product data
-              //       } catch (error) {
-              //         // Handle error for 'intrested_products'
-                      
-              //       }
-              //     })
-              //   );
-              // }
+              // 
       
       //         return {
       //           ...item,
@@ -64,7 +51,51 @@ const EnquiryTable = () => {
       
       //   fetchData();
       // }, [post]);
-    const colums= [
+   
+ 
+      useEffect(() => {
+        const fetchData = async () => {
+          if (post && post.length > 0) {
+            const updatedData = await Promise.all(post.map(async (item) => {
+              const con_id = item['conferencedata'];
+              let intersted_id = item['Interesteds'];
+              const conference = conferenct.find((con) => Number(con.id) === Number(con_id))
+              const conferenceName = conference ? conference.Name : '';
+              
+              let intrestedProductsData = [];
+              if (intersted_id && intersted_id.length > 0) {
+                intrestedProductsData = await Promise.all(
+                  intersted_id.map(async (productId) => {
+                    try {
+                      const response = await axiosInstance.get(`/api/product/${productId}`);
+                      return response.data.Name; // Assuming response.data contains the product data
+                    } catch (error) {
+                      // Handle error for 'intrested_products'
+                      
+                    }
+                  })
+                );
+              }
+        
+              // Return the updated item
+              return {
+                ...item,
+                con_name: conferenceName, // Update 'con_name' property with 'conferencedata' response
+                intrested_products: intrestedProductsData // Add 'intrested_products' property with 'intrested_products' response
+              };
+            }));
+            setPost(updatedData)
+          }
+        };
+      
+        fetchData();
+      }, [post,  conferenct]);
+      
+   
+ 
+   
+   
+      const colums= [
         {
             headerName:'ID' , field:'id',
              editable: false ,
@@ -106,20 +137,20 @@ const EnquiryTable = () => {
         
     },
     {
-        headerName:'message' , 
+        headerName:'Message' , 
         field:"message",
         editable: false , 
         
     },
     {
-        headerName:'Conference Name' , 
-        field:"conferencedata",
+        headerName:'Conference' , 
+        field:"con_name",
         editable: false , 
         
     },
     {
-        headerName:'Interesteds' , 
-        field:"Interesteds",
+        headerName:'Interested' , 
+        field: "intrested_products",
         editable: false , 
     },
   

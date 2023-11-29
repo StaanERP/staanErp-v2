@@ -2,8 +2,7 @@ import React,{useContext, useEffect, useState} from 'react'
 import Select from 'react-select';
 import { useParams } from 'react-router-dom';
 import {   Formik , Field, Form } from 'formik';
-import axiosInstance from '../../../api/axoiss';
-import { TopNavbar } from '../../components/topnavbar/TopNavbar';
+import axiosInstance from '../../../api/axoiss'; 
 import { SideNavbar } from '../../../components/sideNavbar/SideNavbar';
 import DataContext from '../../../context/ItemMasterContext';
 import "./itemmasterEdit.css"
@@ -259,7 +258,7 @@ const ItemMasterEdit = () => {
             initialmaster.Item_Active =  initialMasterData['Item_Active'] !== null ? initialMasterData['Item_Active'] :""
             initialmaster.Service =  initialMasterData['Service'] !== null ? initialMasterData['Service'] :""
         }
-    }, [initialMasterData]);
+    }, [initialMasterData, Accountdata, Category,ItemGroupdata,ItemGroupdata,ItemHsndata,  ItemUOMdata,Item_Indicator, WarrantyBasedOptions,  setTax,  setType ]);
  
    const handleSubmit = async (values, { setSubmitting,   setErrors }) =>{
     console.log('----->>>>>');

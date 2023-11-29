@@ -173,7 +173,7 @@ const ConferenceFrom = ({handleConferenceFromClose,AddConference, conferenceEdit
                 </div>
                 <div className="col-md-6 col-12 mt-md-2">
                   <label>
-                    Status
+                    Active
                     <Field type="checkbox" name="Status"   className='ms-2 me-4' />
                   </label>
                   {formikProps.touched.Status && formikProps.errors.Status && (

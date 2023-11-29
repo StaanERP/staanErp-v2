@@ -213,7 +213,7 @@ useEffect( ()=>{
 
     }
   }
-},[AlternateUomAdd, values.Alternate_uom])
+},[AlternateUomAdd, values.Alternate_uom, getAlterUOMData])
  
 const getAlterUOMData= async(alteruom)=>{
   const response = await axiosInstance.get(`/itemmaster/Alternate/${alteruom}`);

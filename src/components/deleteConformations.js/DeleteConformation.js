@@ -27,7 +27,7 @@ const Detele= async ()=>{
 
         }  else if(url === "/itemmaster/hsn"){
           const response = await axiosInstance.delete(`${url}/${deleteData.id}`)
-         
+          console.log(response);
           const remove_delete_data = ItemHsndata.filter(data=> data.id !== deleteData.id)
           setHsnData(remove_delete_data)
           handletoastDeleteConfomationClose()

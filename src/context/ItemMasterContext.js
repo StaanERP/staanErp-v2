@@ -34,6 +34,9 @@ export const DataProvider = ({children})=>{
     const [accessToken, setAccessToken] = useState();
     const [userId, setUserId] = useState('')
     const [currentConference, setCurrentConference] = useState('')
+    const [stock, setStock] = useState('')
+    const [stockInventory, setStockInventory] = useState([])
+    const [extractData, setExtractData] = useState('')
     
     
     useEffect(()=>{
@@ -50,8 +53,8 @@ export const DataProvider = ({children})=>{
       // store data
         axiosInstance.get(BASE_URL + '/itemmaster/Store')
         .then((res) => {
-          const posts = res.data;
-          setStoredata(posts);;
+          const store_ = res.data;
+          setStoredata(store_);
         })
         .catch((error) => {
           // Handle errors here
@@ -142,7 +145,6 @@ export const DataProvider = ({children})=>{
               scopes: ['user.read', 'openid', 'profile'],
             });
        
-      
             if (loginResponse.accessToken) {
               Navigate("/ItemMaster") 
               localStorage.setItem('access_token', loginResponse.accessToken);
@@ -197,6 +199,16 @@ export const DataProvider = ({children})=>{
             const UserResponse = res.data;
             setUserdata(UserResponse);
             })
+            axiosInstance.get(BASE_URL + '/itemmaster/InventoryApprovals').then((res) => {
+              const InventoryResponse = res.data;
+            
+              setStockInventory(InventoryResponse);
+              })
+            
+            axiosInstance.get(BASE_URL + '/itemmaster/Stock').then((res) => {
+              const StockResponse = res.data;
+              setStock(StockResponse);
+              })
 
             axiosInstance.get(BASE_URL + '/itemmaster/itemGroup').then((res) => {
             const itemGroupResponse = res.data;
@@ -223,6 +235,7 @@ export const DataProvider = ({children})=>{
                 const accountGroupResponse = res.data;
                 setAccountGroupdata(accountGroupResponse);
                 }) 
+               
         } catch (err) {
           console.log(`Error: ${err.message}`);
         }
@@ -278,13 +291,12 @@ export const DataProvider = ({children})=>{
       const handletoastDeleteConfomationClose = () => setToastDeleteConfomation(false);
       const handltoastDeleteConfomationShow = () => setToastDeleteConfomation(true);
       
-      
-      
+       
  
     return (
 
         <DataContext.Provider value={{ 
-          userName,currentConference,userEmail,
+          userName,currentConference,userEmail,stock,stockInventory,extractData, setExtractData,
           login,logout,ItemGroupSelect,setItemGroupSelect,setItemUOMSelect, ItemUOMSelect,ItemHSNSelect, setItemHSNSelect,
           ItemAccountGroupSelect, setItemAccountGroupSelect,setItemAccountSelect,
           ItemAccountSelect,type, setType,tax, setTax, storedata, setStoredata,userdata,
@@ -299,7 +311,7 @@ export const DataProvider = ({children})=>{
           ItemAccountGroupAdd ,  handlAccountGroupShow, handleAccountGroupClose,
           AlternateUomAdd, handlAlternateUomShow , handleAlternateUomClose,
           toastDeleteConfomation, handletoastDeleteConfomationClose,handltoastDeleteConfomationShow ,
-          setConference,   setToastSave, toggleShowA,  Navigate , conferenct, enquiry, setEnquiry ,userId,
+          setConference,   setToastSave, toggleShowA,  Navigate , conferenct, enquiry, setEnquiry ,userId,loading , accessToken
 
         }}>
         

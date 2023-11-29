@@ -14,7 +14,7 @@ export const initializeMsal = async () => {
     async function initializeMsal() {
       await pca.initialize();
       // Now you can safely access msalInstance methods
-      const logger = pca.getLogger(); // This should work without errors
+      // const logger = pca.getLogger(); // This should work without errors
     }
     initializeMsal();
     

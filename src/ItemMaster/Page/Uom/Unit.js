@@ -3,8 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import { SideNavbar } from '../../../components/sideNavbar/SideNavbar';
 import DataContext from '../../../context/ItemMasterContext';
-import AddUom from '../../components/model/AddUom';
-import { logDOM } from '@testing-library/react';
+import AddUom from '../../components/model/AddUom'; 
 import DeleteConformation from '../../../components/deleteConformations.js/DeleteConformation';
 const Unit = () => {
     const {ItemUOMdata, handlUOMShow, handltoastDeleteConfomationShow} = useContext(DataContext)
@@ -37,9 +36,8 @@ const Unit = () => {
    
 
        const url = "/itemmaster/UOM"
-              
-        let itemId;
-           
+        const itemId = ""       
+            
         const deleteButton = ({ value, data }) => {
                 itemId = data.id; // Assign the value to the higher-scoped itemId
                 const handleClick = () => {

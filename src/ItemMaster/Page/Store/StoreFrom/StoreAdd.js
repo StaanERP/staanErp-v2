@@ -8,7 +8,7 @@ import Select from 'react-select';
 import axiosInstance from '../../../../api/axoiss';
 
 const StoreAdd = ({storeEditId,setstoreEditId }) => {
-    const {storedata, storeAdd, handleStoreAddClose, setStoredata , Accountdata, userdata, Navigate} =
+    const {storedata, storeAdd, handleStoreAddClose, setStoredata , Accountdata, userdata} =
      useContext(DataContext)
     const [selectAccount , setSelectAccount] = useState()
     const handleSelectAccount =(option)=>{
@@ -71,7 +71,7 @@ function reset_form(){
             setSelectInCharge({ value: defaultSelecteduser.id, label: defaultSelecteduser.username });
         }
       }
-  }, [initialStore.StoreAccount ]);
+  }, [initialStore.StoreAccount,initialStore.StoreInCharge ]);
     
     
 

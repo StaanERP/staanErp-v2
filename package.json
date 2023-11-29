@@ -9,7 +9,10 @@
     "@testing-library/user-event": "^13.5.0",
     "ag-grid-react": "^30.2.1",
     "axios": "^1.6.2",
+    "compromise": "^14.10.1",
     "formik": "^2.4.5",
+    "jodit-react": "^1.3.39",
+    "mkcert": "^3.2.0",
     "react": "^18.2.0",
     "react-avatar": "^5.0.3",
     "react-bootstrap": "^2.9.1",
@@ -18,12 +21,14 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
     "react-toastify": "^9.1.3",
+    "react-webcam": "^7.2.0",
     "swiper": "^11.0.5",
+    "tesseract.js": "^5.0.3",
     "web-vitals": "^2.1.4",
     "yup": "^1.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env HTTPS=true SSL_CRL_FILE=./certs/cert.crt SSL_KEY_FILE=./certs/cert.key react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,5 +1,6 @@
 import axios from "axios"; 
+import {BASE_URL} from '../ApiDomain'
 
 export default axios.create({
-    baseURL : "http://127.0.0.1:9000/"
+    baseURL :BASE_URL
 })

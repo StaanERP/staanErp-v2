@@ -8,7 +8,7 @@ import AddHsn from '../../components/model/AddHsn';
 import DeleteConformation from '../../../components/deleteConformations.js/DeleteConformation';
 
 const Hsn = () => {
-    const {ItemHsndata, ItemHSNAdd, handlHSNShow, handltoastDeleteConfomationShow} = useContext(DataContext)
+    const {ItemHsndata,   handlHSNShow, handltoastDeleteConfomationShow} = useContext(DataContext)
     const [post , setPost] = useState([])
     const [HSNedit, setHsnEdit] = useState('')
     const [deleteData, setDeleteData] = useState('')
@@ -18,8 +18,7 @@ const Hsn = () => {
 
     const url = "/itemmaster/hsn"
     
-   
-    let itemId;
+    const itemId = ""    
  
     const deleteButton = ({ value, data }) => {
       itemId = data.id; // Assign the value to the higher-scoped itemId

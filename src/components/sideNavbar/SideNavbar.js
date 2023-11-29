@@ -3,8 +3,8 @@ import "./sideNavbar.css"
 import DataContext from '../../context/ItemMasterContext'
 
 export const SideNavbar = () => {
-    const {logout, userName, userId, userEmail} =useContext(DataContext)
-    const [PurchaseSubBar , setPurchaseSubBar] = useState(false)
+    const {logout, userName,   userEmail} =useContext(DataContext)
+ 
     const [InventorySubBar , setInventorySubBar] = useState(false)
     const [accountSubBar , setaccountSubBar] = useState(false)
     const [conferenceSubBar , setconferenceSubBar] = useState(false)
@@ -55,11 +55,23 @@ export const SideNavbar = () => {
                      <span className='nav_link_name' >HSN</span>
                      </a> 
                 </li>
+                <li> 
+                     <a href="/StockStement" >
+                     <i class="fa-solid fa-note-sticky"></i>
+                     <span className='nav_link_name' >Stock StateMent</span>
+                     </a> 
+                </li>
+                <li> 
+                     <a href="/inventoryApproval" >
+                     <i class="fa-solid fa-boxes-stacked"></i>
+                     <span className='nav_link_name' >Inventory Approval</span>
+                     </a> 
+                </li>
                 
              </ul>
           
         </li>
-        <li onMouseEnter={() => setPurchaseSubBar(true)} onMouseLeave={() => setPurchaseSubBar(false)}>
+        <li>
             <a href="/" >
                    <i className='bx bx-credit-card' ></i>
                 <span className='nav_link_name' >Purchase</span>

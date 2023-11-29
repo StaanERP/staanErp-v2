@@ -26,11 +26,10 @@ const AccountMasterlist = () => {
               };
         })
         setPost(postAccountdata)
-    },[Accountdata])
+    },[Accountdata, AccountGroupdata])
 
     const url = "/itemmaster/AccountsMaster"
-   
-   let itemId;
+    const itemId = ""    
 
    const deleteButton = ({ value, data }) => {
      itemId = data.id; // Assign the value to the higher-scoped itemId

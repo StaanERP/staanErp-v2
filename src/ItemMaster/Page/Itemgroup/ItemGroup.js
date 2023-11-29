@@ -11,9 +11,8 @@ const ItemGroup = () => {
     const [postData, setPostData] = useState()
     const [itemGroupEditId , setitemGroupEditId] = useState()
 
-    const url = "/itemmaster/itemGroup"
-   
-    let itemId;
+    // const url = "/itemmaster/itemGroup"
+    const itemId = ""    
  
     const deleteButton = ({ value, data }) => {
       itemId = data.id; // Assign the value to the higher-scoped itemId
@@ -67,7 +66,7 @@ const ItemGroup = () => {
               };
         })
         setPostData(postGroupData)
-      },[ItemGroupdata])
+      },[ItemGroupdata, ItemHsndata])
     const columns = [
   
         { headerName: "Name", field: "name",flex: 1 },

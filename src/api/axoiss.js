@@ -1,10 +1,11 @@
 import axios from "axios"; 
+import {BASE_URL} from '../ApiDomain'
 
 
-const baseURL ="http://127.0.0.1:8000/"
+// const baseURL ="https://maxnik.org/"
 
 const axiosInstance = axios.create({
-    baseURL:baseURL,
+    baseURL:BASE_URL,
     timeout:5000,
     headers :{
         Authorization:localStorage.getItem('access_token')

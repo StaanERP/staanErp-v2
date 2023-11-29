@@ -9,16 +9,15 @@ import DeleteConformation from '../../../components/deleteConformations.js/Delet
  
 
 const Store = () => {
-   const {storedata, userdata, Accountdata, handlStoreAddShow, storeAdd, toggleShowB, handltoastDeleteConfomationShow} = useContext(DataContext)
+   const {storedata, userdata, Accountdata, handlStoreAddShow, storeAdd,   handltoastDeleteConfomationShow} = useContext(DataContext)
    const [deleteData, setdeleteData] = useState({  Name:"",id:""})
    const [post, setPost] = useState([])
    const [storeEditId , setstoreEditId] = useState()
    
 
    const url = "/itemmaster/Store"
-   
-   let itemId;
-
+    
+   const itemId = ""    
    const deleteButton = ({ value, data }) => {
      itemId = data.id; // Assign the value to the higher-scoped itemId
      const handleClick = () => {
