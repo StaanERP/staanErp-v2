@@ -12,10 +12,10 @@ const ItemGroup = () => {
     const [itemGroupEditId , setitemGroupEditId] = useState()
 
     // const url = "/itemmaster/itemGroup"
-    const itemId = ""    
+    
  
     const deleteButton = ({ value, data }) => {
-      itemId = data.id; // Assign the value to the higher-scoped itemId
+      
       const handleClick = () => {
         handlitemGroupShow();
         console.log(data);

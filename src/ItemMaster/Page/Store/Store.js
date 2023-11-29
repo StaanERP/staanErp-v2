@@ -17,9 +17,9 @@ const Store = () => {
 
    const url = "/itemmaster/Store"
     
-   const itemId = ""    
+    
    const deleteButton = ({ value, data }) => {
-     itemId = data.id; // Assign the value to the higher-scoped itemId
+     
      const handleClick = () => {
        handlStoreAddShow();
        setstoreEditId(data.id);

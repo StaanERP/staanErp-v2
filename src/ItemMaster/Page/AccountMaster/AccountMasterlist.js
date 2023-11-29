@@ -29,10 +29,10 @@ const AccountMasterlist = () => {
     },[Accountdata, AccountGroupdata])
 
     const url = "/itemmaster/AccountsMaster"
-    const itemId = ""    
+       
 
    const deleteButton = ({ value, data }) => {
-     itemId = data.id; // Assign the value to the higher-scoped itemId
+      // Assign the value to the higher-scoped itemId
      const handleClick = () => {
         handlAccountShow();
         setAccountGroupType('all')

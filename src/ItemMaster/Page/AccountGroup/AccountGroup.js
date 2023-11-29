@@ -37,10 +37,9 @@ const AccountGroup = () => {
         resizable: true,
       };
       const url = "/itemmaster/AccountsGroup"
-      const itemId = ""    
-
+       
    const deleteButton = ({ value, data }) => {
-     itemId = data.id; // Assign the value to the higher-scoped itemId
+       // Assign the value to the higher-scoped itemId
      const handleClick = () => { 
         handlAccountGroupShow()
        setAccountEdit(data);  setdeleteData({
