@@ -25,13 +25,106 @@ const EnquiryFrom = () => {
     const [textEditer_, settextEditer_] = useState(true)
     const [selectedFile, setSelectedFile] = useState(null);
     
-
+    
     const webcamRef = useRef(null);
 
     const [isCameraStarted, setIsCameraStarted] = useState(false);
 
     const startCamera = () => {
       setIsCameraStarted(true);
+    };
+    const extractInfoFromImage = async (image) => {
+  
+      try {
+        // if (!selectedFile) {
+        //   console.error('No file selected');
+        //   return;
+        // }
+        const { data: { text } } = await Tesseract.recognize(
+          selectedFile,
+          'eng', // Language code for English
+          { logger: (info) => console.log(info) } // Optional logger
+        );
+        setExtractData(text)
+        const lines = text.split(/\n+/);
+        const doc = compromise(text);
+  
+        const extractedInfo = {
+          name: '',
+          phone: '',
+          email: '',
+          address: '',
+          organizations : "",
+          city:""
+        };
+    
+        // Define regular expressions for phone, email, and address
+        // const phoneRegex = /(\+?\d{1,4}[-.\s]?)?\(?\d{1,}\)?[-.\s]?\d{1,}[-.\s]?\d{1,}[-.\s]?\d{1,}/;
+        const phoneRegex_1 =/\+?9?1?\s?-?\d{5}\s?\d{5}/;
+     
+        const emailRegex = /\S+@\S+\.\S+/;
+        const addressRegex = /\d+[-.\s]?\d+\s*,\s*\S+.*\d{5}/;
+   
+    
+        // Iterate through lines and extract information
+        lines.forEach((line) => {
+          extractedInfo.name = doc.people().out('array').join(' ');
+          // extractedInfo.email = doc.emails() 
+          // extractedInfo.phone =  doc.phoneNumbers() 
+          extractedInfo.organizations = doc.organizations().out('array').join(' ');
+       
+          if (!extractedInfo.phone) {
+            const phoneMatch = line.match(phoneRegex_1);
+            console.log(phoneMatch);
+            if (phoneMatch) {
+              extractedInfo.phone = phoneMatch[0].trim();
+            }
+          }
+          options.forEach((keyword) => {
+            if (line.includes(keyword.value)) {
+              extractedInfo.city = keyword.value;
+            }
+          });
+        
+    
+          if (!extractedInfo.email) {
+            const emailMatch = line.match(emailRegex);
+            if (emailMatch) {
+              extractedInfo.email = emailMatch[0].trim();
+            }
+          }
+    
+          if (!extractedInfo.address) {
+            const addressMatch = line.match(addressRegex);
+            if (addressMatch) {
+              extractedInfo.address = addressMatch[0].trim();
+            }
+          }
+        });
+      
+        handlenameChange(extractedInfo.name)
+        handlemailChange(extractedInfo.email)
+        handlphoneChange(extractedInfo.phone)
+        
+        handlOrgChange(extractedInfo.organizations)
+        setSelectLocations( { value: extractedInfo.city , label:  extractedInfo.city });
+        initialValues.name = extractedInfo.name
+        initialValues.Hospital = extractedInfo.organizations
+        initialValues.email = extractedInfo.email
+        initialValues.Mobile = extractedInfo.phone
+        initialValues.locations = extractedInfo.city
+        
+        console.log('Extracted Information:', extractedInfo)
+        console.log(text);
+        
+        
+        
+    
+         
+        // }
+      } catch (error) {
+        console.error('Error processing business card image:', error);
+      }
     };
 
 
@@ -42,7 +135,7 @@ const EnquiryFrom = () => {
         // console.log(imageSrc);
         extractInfoFromImage(imageSrc)
       }
-    }, [extractInfoFromImage]);
+    },[webcamRef, extractInfoFromImage]);
 
     const handletextedtier = ()=>{
       settextEditer_(!textEditer_)
@@ -62,99 +155,7 @@ const EnquiryFrom = () => {
   })
      
  
-  const extractInfoFromImage = async (image) => {
-  
-    try {
-      // if (!selectedFile) {
-      //   console.error('No file selected');
-      //   return;
-      // }
-      const { data: { text } } = await Tesseract.recognize(
-        selectedFile,
-        'eng', // Language code for English
-        { logger: (info) => console.log(info) } // Optional logger
-      );
-      setExtractData(text)
-      const lines = text.split(/\n+/);
-      const doc = compromise(text);
 
-      const extractedInfo = {
-        name: '',
-        phone: '',
-        email: '',
-        address: '',
-        organizations : "",
-        city:""
-      };
-  
-      // Define regular expressions for phone, email, and address
-      // const phoneRegex = /(\+?\d{1,4}[-.\s]?)?\(?\d{1,}\)?[-.\s]?\d{1,}[-.\s]?\d{1,}[-.\s]?\d{1,}/;
-      const phoneRegex_1 =/\+?9?1?\s?-?\d{5}\s?\d{5}/;
-   
-      const emailRegex = /\S+@\S+\.\S+/;
-      const addressRegex = /\d+[-.\s]?\d+\s*,\s*\S+.*\d{5}/;
- 
-  
-      // Iterate through lines and extract information
-      lines.forEach((line) => {
-        extractedInfo.name = doc.people().out('array').join(' ');
-        // extractedInfo.email = doc.emails() 
-        // extractedInfo.phone =  doc.phoneNumbers() 
-        extractedInfo.organizations = doc.organizations().out('array').join(' ');
-     
-        if (!extractedInfo.phone) {
-          const phoneMatch = line.match(phoneRegex_1);
-          console.log(phoneMatch);
-          if (phoneMatch) {
-            extractedInfo.phone = phoneMatch[0].trim();
-          }
-        }
-        options.forEach((keyword) => {
-          if (line.includes(keyword.value)) {
-            extractedInfo.city = keyword.value;
-          }
-        });
-      
-  
-        if (!extractedInfo.email) {
-          const emailMatch = line.match(emailRegex);
-          if (emailMatch) {
-            extractedInfo.email = emailMatch[0].trim();
-          }
-        }
-  
-        if (!extractedInfo.address) {
-          const addressMatch = line.match(addressRegex);
-          if (addressMatch) {
-            extractedInfo.address = addressMatch[0].trim();
-          }
-        }
-      });
-    
-      handlenameChange(extractedInfo.name)
-      handlemailChange(extractedInfo.email)
-      handlphoneChange(extractedInfo.phone)
-      
-      handlOrgChange(extractedInfo.organizations)
-      setSelectLocations( { value: extractedInfo.city , label:  extractedInfo.city });
-      initialValues.name = extractedInfo.name
-      initialValues.Hospital = extractedInfo.organizations
-      initialValues.email = extractedInfo.email
-      initialValues.Mobile = extractedInfo.phone
-      initialValues.locations = extractedInfo.city
-      
-      console.log('Extracted Information:', extractedInfo)
-      console.log(text);
-      
-      
-      
-  
-       
-      // }
-    } catch (error) {
-      console.error('Error processing business card image:', error);
-    }
-  };
  
   const options =[
     {value : "Achalpur",  label: "Achalpur"},
