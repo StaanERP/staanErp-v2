@@ -1361,10 +1361,12 @@ const EnquiryFrom = () => {
   const handleSelectLocations =(option)=>{
     setSelectLocations( { value: option.value , label:  option.label });
   }
-  
+  const videoConstraints = {
+    facingMode: 'environment', // Use 'environment' for the rear camera
+  };
     return (
         <>
-         {isCameraStarted ? <CameraComponent webcamRef ={webcamRef} capture ={capture} setIsCameraStarted={setIsCameraStarted}/>: ""}
+         {isCameraStarted ? <CameraComponent webcamRef ={webcamRef} capture ={capture}  videoConstraints={videoConstraints} setIsCameraStarted={setIsCameraStarted}/>: ""}
            <div className="wrap   container-md mt-4 ">
     
             <div className='top_div shadow-lg px-4    container-sm   bg-white  container        '>
