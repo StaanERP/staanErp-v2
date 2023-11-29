@@ -1362,7 +1362,8 @@ const EnquiryFrom = () => {
     setSelectLocations( { value: option.value , label:  option.label });
   }
   const videoConstraints = {
-    facingMode: 'environment', // Use 'environment' for the rear camera
+    facingMode: 'environment', // or 'user' for front camera
+    deviceId: backCamera ? { exact: backCamera.deviceId } : undefined,
   };
     return (
         <>
