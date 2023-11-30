@@ -37,6 +37,7 @@ export const DataProvider = ({children})=>{
     const [stock, setStock] = useState('')
     const [stockInventory, setStockInventory] = useState([])
     const [extractData, setExtractData] = useState('')
+    const [product, setProduct] = useState([])
     
     
     useEffect(()=>{
@@ -199,6 +200,10 @@ export const DataProvider = ({children})=>{
             const UserResponse = res.data;
             setUserdata(UserResponse);
             })
+            axiosInstance.get(BASE_URL + '/api/product').then((res) => {
+              const ProductResponse = res.data;
+              setProduct(ProductResponse);
+              })
             axiosInstance.get(BASE_URL + '/itemmaster/InventoryApprovals').then((res) => {
               const InventoryResponse = res.data;
             
@@ -311,7 +316,8 @@ export const DataProvider = ({children})=>{
           ItemAccountGroupAdd ,  handlAccountGroupShow, handleAccountGroupClose,
           AlternateUomAdd, handlAlternateUomShow , handleAlternateUomClose,
           toastDeleteConfomation, handletoastDeleteConfomationClose,handltoastDeleteConfomationShow ,
-          setConference,   setToastSave, toggleShowA,  Navigate , conferenct, enquiry, setEnquiry ,userId,loading , accessToken
+          setConference,   setToastSave, toggleShowA,  Navigate , conferenct, enquiry, setEnquiry ,userId,loading , accessToken,
+          product
 
         }}>
         

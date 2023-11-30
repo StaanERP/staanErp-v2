@@ -6,61 +6,35 @@ import DataContext from '../../../context/ItemMasterContext';
 import axiosInstance from '../../../api/axoiss';
 import { SideNavbar } from '../../../components/sideNavbar/SideNavbar';
 import { useNavigate } from 'react-router-dom';
+import EnquiryFromEdit from './EnquiryFromEdit';
+import "./Enquirystyle.css" 
 
 const EnquiryTable = () => {
-    const {enquiry,   conferenct} = useContext(DataContext)
+    const {enquiry,   conferenct,userdata} = useContext(DataContext)
     const navigate = useNavigate();
     const [post, setPost] =  useState('')
-    useEffect(()=>{
-       
-        setPost(enquiry)
-        // console.log(enquiry);
-    },[enquiry])
+    const [enquiryEdit, setEnquiryEdit] = useState('')
 
-    // const 
-    // useEffect(() => {
-        // const fetchData = async () => {
-        //   if (post && post.length > 0) { 
-        //     const updatedData = await Promise.all(post.map(async (item) => {
-        //       const con_id = item['conferencedata'];
-        //       let intersted_id = item['Interesteds'];
-      
-        //       // Fetch data for 'conferencedata'
-        //       let conferenceData;
-        //       if (con_id) {
-        //         try {
-        //           const response = await axiosInstance.get(`api/conferenceDetails/${con_id}`);
-        //           conferenceData = response.data.Name;
-        //         } catch (error) {
-        //           // Handle error for 'conferencedata'
-        //         }
-        //       }
-      
-              // Fetch data for 'intrested_products'
-              // 
-      
-      //         return {
-      //           ...item,
-      //           con_name: conferenceData, // Update 'con_name' property with 'conferencedata' response
-      //           // intrested_products: "data" // Add 'intrested_products' property with 'intrested_products' response
-      //         };
-      //       }));
-      //       setPost(updatedData);
-      //     }
-      //   };
-      
-      //   fetchData();
-      // }, [post]);
+    
    
  
       useEffect(() => {
         const fetchData = async () => {
-          if (post && post.length > 0) {
-            const updatedData = await Promise.all(post.map(async (item) => {
+          if (enquiry && enquiry.length > 0) {
+            const updatedData = await Promise.all(enquiry.map(async (item) => {
               const con_id = item['conferencedata'];
+              const user_id = item['salesPerson'];
               let intersted_id = item['Interesteds'];
               const conference = conferenct.find((con) => Number(con.id) === Number(con_id))
               const conferenceName = conference ? conference.Name : '';
+              const Sales_man =  userdata.find((useritem)=> useritem.id ===  user_id)
+              let salesmana_name = ""
+              try{
+                salesmana_name = Sales_man['username']
+         
+              } catch{
+                salesmana_name =""
+              }
               
               let intrestedProductsData = [];
               if (intersted_id && intersted_id.length > 0) {
@@ -81,78 +55,136 @@ const EnquiryTable = () => {
               return {
                 ...item,
                 con_name: conferenceName, // Update 'con_name' property with 'conferencedata' response
-                intrested_products: intrestedProductsData // Add 'intrested_products' property with 'intrested_products' response
+                intrested_products: intrestedProductsData, // Add 'intrested_products' property with 'intrested_products' response
+                salesmana_name :salesmana_name
               };
-            }));
+            })); 
             setPost(updatedData)
           }
         };
       
         fetchData();
-      }, [post,  conferenct]);
+      }, [enquiry , conferenct, userdata]);
       
    
  
    
    
       const colums= [
+        { headerName: "Action", cellRenderer: 'editButton', width: 100,
+           },
         {
             headerName:'ID' , field:'id',
              editable: false ,
              filter:false,
+             flex:1,
+             hide : true,
+             headerClass: 'center-header'
             
         },
         {
             headerName:'Name' , field:'Name',  
+       
+            width: 150,
+            headerClass: 'center-header'
         },
         {
           headerName:'Status' , 
-          field:'status',editable:true,
+          field:'status',editable:false,
           cellEditor: 'agSelectCellEditor',
-          cellEditorParams: {
-            values: ['Not Contacted', 'Converted', 'Junk'],
-          },
+          width: 150,
+          headerClass: 'center-header'
+       
+          // cellEditorParams: {
+          //   values: ['Not Contacted', 'Converted', 'Junk'],
+          // },
       },
         {
-            headerName:'OrganizationName' , 
+            headerName:'Organization' , 
             field:'OrganizationName',
+            width: 200,
+            headerClass: 'center-header'
             
         },
         {
           headerName:'Email' , 
           field:"Email",
           editable: false , 
+          width: 200,
+          headerClass: 'center-header'
+    
          
       },
       {
         headerName:'Mobile Number' , 
         field:"MobileNumber",
         editable: false , 
+        headerClass: 'center-header'
        
     },
     {
-        headerName:'Location' , 
+      headerName:'Alternate Number' , 
+      field:"alternateMobileNumber",
+      editable: false , 
+      headerClass: 'center-header'
+     
+  },
+    {
+        headerName:'City' , 
         field:"Location",
-        editable: false , 
-        
+        headerClass: 'center-header'
     },
     {
         headerName:'Message' , 
         field:"message",
         editable: false , 
-        
+        headerClass: 'center-header'
     },
     {
         headerName:'Conference' , 
         field:"con_name",
         editable: false , 
-        
+        headerClass: 'center-header'
     },
     {
         headerName:'Interested' , 
         field: "intrested_products",
         editable: false , 
+        headerClass: 'center-header'
     },
+    {
+      headerName:'Sales Person' , 
+      field: "salesmana_name",
+      editable: false , 
+      headerClass: 'center-header'
+    },
+    {
+      headerName:'Follow up' , 
+      field: "followup",
+      editable: false , 
+      headerClass: 'center-header',
+      valueFormatter: (params) => {
+        if (params.value == null || params.value === '') {
+          return ''; // Return empty string for empty values
+        }
+  
+        // Format the date using your preferred date library or JavaScript Date methods
+        const formattedDate = new Date(params.value).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        });
+  
+        return formattedDate;
+      },
+    },
+    {
+      headerName:'Remarks' , 
+      field: "Remarks",
+      editable: false , 
+      headerClass: 'center-header'
+    },
+    
   
         
     ]
@@ -168,15 +200,46 @@ const EnquiryTable = () => {
  
         navigate('/Enquiry');
       };
+    const editButton = ({ value, data }) => {
+    
+      const handleClick = () => {
+        handleenquiryEditFromShow()
+        setEnquiryEdit(data);
+      };
+      
+      // const handledeleteConfomation = () => {
+        
+      //   handltoastDeleteConfomationShow();
+      //   setdeleteData({
+      //     Name:data.StoreName,
+      //     id: data.id
+      //   }); 
+    
+      // };
+      
+  
+      return ( 
+        <>
+        <button className='btn btn-outline-success btn-sm px-3 mx-2' onClick={handleClick}> <i class="fa-solid fa-pen   " ></i> </button>      
+        
+        </>
+      );
+    } 
+    const components = {
+      editButton: editButton,
+    };
+    const [enquiryEditFrom, setEnquiryEditFrom] = useState(false);
 
+    const handleenquiryEditFromClose = () => setEnquiryEditFrom(false);
+    const handleenquiryEditFromShow = () => setEnquiryEditFrom(true);
   return (
     <>
        <SideNavbar/>
-       <div className='container-lg'>
+       <div className='container-xxl'>
             <div className="itemMaster_Top mx-3 mt-3" style={{   width: "100%" }}>
                 <div className="row py-3 ps-3">
                     <div className="col-6">
-                        <h3>Enquiry</h3>
+                        <h3>Enquiry Contacts </h3>
                     </div>
                     <div className="col-6 text-end pe-4">
                         <button type="button" className="btn btn-outline-primary" onClick={handleButtonClick}  ><i class='bx bxs-plus-circle' ></i> New</button>
@@ -189,12 +252,21 @@ const EnquiryTable = () => {
             columnDefs={colums}
             defaultColDef={defaultColDef} 
             pagination={true}
+            components={components}
+            style={{ overflowX: 'auto' }}
             />
             </div> 
             
             
 
       </div>
+      <EnquiryFromEdit 
+      enquiryEditFrom = {enquiryEditFrom}
+      handleenquiryEditFromClose = {handleenquiryEditFromClose}
+      enquiryEdit = {enquiryEdit}
+      />
+
+      
     </>
   )
 }

@@ -258,8 +258,8 @@ const ItemMasterEdit = () => {
             initialmaster.Item_Active =  initialMasterData['Item_Active'] !== null ? initialMasterData['Item_Active'] :""
             initialmaster.Service =  initialMasterData['Service'] !== null ? initialMasterData['Service'] :""
         }
-    }, [initialMasterData, Accountdata, Category,ItemGroupdata,ItemGroupdata,ItemHsndata,  ItemUOMdata,Item_Indicator, WarrantyBasedOptions,  setTax,  setType ]);
- 
+    }, [initialMasterData,Accountdata,ItemGroupdata  , ItemGroupdata, ItemHsndata, ItemUOMdata,setTax ,setType ]);
+//  , , Category,,,,Item_Indicator  ,WarrantyBasedOptions, ,  ,  
    const handleSubmit = async (values, { setSubmitting,   setErrors }) =>{
     console.log('----->>>>>');
     console.log(values);
@@ -338,19 +338,19 @@ const ItemMasterEdit = () => {
      <>
      <SideNavbar/>
      <div className='itemMaster_Wrap container-fluid  overflow-auto ps-0'> 
-         <div className="container mt-5"> 
+         <div className="container mt-5 itemMasterEditWrap bg-white rounded"> 
              <Formik initialValues={initialmaster}
              validationSchema={ItemMasterSchema}
              onSubmit={handleSubmit}>
                  {({errors, touched, isSubmitting, values, setFieldValue , Formik, formikProps })=>(
                     <>
                     <Form  >
-                     <div className="row bg-white rounded">
-                        <div className="col-6 fw-bold fs-4 ">
+                     <div className="row ">
+                        <div className="col-6 fw-bold fs-4 my-2 ">
                          ItemMaster Edit
                         </div>
                          
-                        <div className="col-6 text-end">
+                        <div className="col-6 text-end my-2">
                         
                         <button type='button' className="btn shadow-sm btn-outline-primary" hidden={!ItemMasterEditDisabled} onClick={()=>{setItemMasterEditDisabled(false)}}>Edit</button>
                         <button type='button' className="btn shadow-sm btn-outline-primary mx-2" hidden={!ItemMasterEditDisabled} onClick={()=>{Navigate("/ItemMaster")}}><i class='bx bx-window-close'></i></button>

@@ -8,6 +8,9 @@ export const EnquirySchema = yup.object().shape({
     .min(10, 'Mobile number must be at least 10 characters')
     .max(15, 'Mobile number must be less than or equal to 15 characters')
     .required('Please Enter Mobile'),
+    alternateMobileNumber : yup.string()
+    .min(10, 'Mobile number must be at least 10 characters')
+    .max(15, 'Mobile number must be less than or equal to 15 characters'),
     locations: yup.string().required("Please Enter City"),
     message:  yup.string(),
     intrested: yup.array() 

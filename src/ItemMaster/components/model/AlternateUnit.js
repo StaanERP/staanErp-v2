@@ -201,20 +201,6 @@ const ResetValue = ()=>{
     unit :""
 });
 }
-// edit functions
-useEffect( ()=>{
-  if((values.Alternate_uom && AlternateUomAdd === true )){
-    
-    const alteruoms = values.Alternate_uom
-    for (let alteruom of alteruoms) {
-       console.log(alteruom);
-       getAlterUOMData(alteruom)
-       
-
-    }
-  }
-},[AlternateUomAdd, values.Alternate_uom, getAlterUOMData])
- 
 const getAlterUOMData= async(alteruom)=>{
   const response = await axiosInstance.get(`/itemmaster/Alternate/${alteruom}`);
   const responseData = Array.isArray(response.data) ? response.data : [response.data];
@@ -233,6 +219,21 @@ const getAlterUOMData= async(alteruom)=>{
  );
 
 }
+// edit functions
+useEffect( ()=>{
+  if((values.Alternate_uom && AlternateUomAdd === true )){
+    
+    const alteruoms = values.Alternate_uom
+    for (let alteruom of alteruoms) {
+       console.log(alteruom);
+       getAlterUOMData(alteruom)
+       
+
+    }
+  }
+},[AlternateUomAdd, values.Alternate_uom, getAlterUOMData])
+ 
+
 
 
   return (

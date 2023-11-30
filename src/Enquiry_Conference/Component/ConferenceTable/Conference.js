@@ -10,7 +10,7 @@ import DeleteConformation from '../../../components/deleteConformations.js/Delet
  
 
 const Conference = () => {
-    const {conferenct, handltoastDeleteConfomationShow} = useContext(DataContext)
+    const {conferenct, handltoastDeleteConfomationShow, userdata} = useContext(DataContext)
     useEffect(()=>{
         console.log(conferenct);
     },[conferenct])
@@ -54,14 +54,55 @@ const Conference = () => {
         },
         {
           headerName:'Start Date ' , field:'startDate', flex:3,
+          valueFormatter: (params) => {
+            if (params.value == null || params.value === '') {
+              return ''; // Return empty string for empty values
+            }
+      
+            // Format the date using your preferred date library or JavaScript Date methods
+            const formattedDate = new Date(params.value).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            });
+      
+            return formattedDate;
+          },
        },
        {
         headerName:'End Date' , field:'endDate', flex:3,
+        valueFormatter: (params) => {
+          if (params.value == null || params.value === '') {
+            return ''; // Return empty string for empty values
+          }
+    
+          // Format the date using your preferred date library or JavaScript Date methods
+          const formattedDate = new Date(params.value).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          });
+    
+          return formattedDate;
+        },
        },
         {
           headerName:'Incharge' , 
           field:"incharge", 
-          flex:3
+          flex:3,
+          valueFormatter: (params) => {
+ 
+            const Sales_man =  userdata.find((useritem)=> useritem.id ===  Number(params.value))
+            let salesmana_name = ""
+            try{
+              salesmana_name = Sales_man['username']
+       
+            } catch{
+              salesmana_name =""
+            }
+            return salesmana_name;
+          },
+
       },
       {
         headerName: 'Active',

@@ -5,10 +5,10 @@
   height: 90%; 
   position: relative;
   top: 10%;
-  overflow: hidden;
+  /* overflow: hidden; */
   justify-content: space-between;
- 
 }
+
  .textEdit{
   position:relative;
   top: 13%;
@@ -310,6 +310,11 @@
     position: relative;
     top: 50%;
   } 
+
+  .center-header{
+    text-align: center !important;
+     
+  }
   
   /* animations  */
   

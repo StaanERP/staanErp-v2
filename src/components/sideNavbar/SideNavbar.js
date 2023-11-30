@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import "./sideNavbar.css"
 import DataContext from '../../context/ItemMasterContext'
+import staanlogo from "../../img/logo-final.png"
 
 export const SideNavbar = () => {
     const {logout, userName,   userEmail} =useContext(DataContext)
@@ -12,24 +13,25 @@ export const SideNavbar = () => {
   return (
     <>
     <div className="nav_sidebar">
-      <div className="nav_logodetails">
+      <div className="nav_logodetails  ">
       
-        <div className="nav_logo_name">S<span className='nav_logo_name_t'>t</span>aan</div>
+        {/* <div className="nav_logo_name">S<span className='nav_logo_name_t'>t</span>aan</div> */}
+        <img src = {staanlogo} alt=""    className='img-fluid' srcset="" />
       
       </div>
       <ul className="nav-list">
         <li>
-            <a href="/ItemMaster">
+            <div>
             <i className='bx bx-home-alt'></i>
                 <span className='nav_link_name' >Home</span>
-            </a>
+            </div>
            
         </li>
-        <li  onMouseEnter={() => setInventorySubBar(true)} onMouseLeave={() => setInventorySubBar(false)}>
-            <a  href="/" >
+        <li onClick={() => setInventorySubBar(true)}  onMouseEnter={() => setInventorySubBar(true)} onMouseLeave={() => setInventorySubBar(false)}>
+            <div >
             <i className='bx bx-notepad'></i>
                 <span className='nav_link_name' >Inventory</span>
-            </a>
+            </div>
             <ul className='sub_nav-list' style={{ display: InventorySubBar ? 'block' : 'none' }}>
                 <li> 
                      <a href="/store" >
@@ -72,23 +74,23 @@ export const SideNavbar = () => {
           
         </li>
         <li>
-            <a href="/" >
+            <div>
                    <i className='bx bx-credit-card' ></i>
                 <span className='nav_link_name' >Purchase</span>
-            </a>
+            </div>
         </li>
         <li>
-            <a href="/">
+            <div>
             <i className='bx bx-bar-chart-alt'></i>
                 <span className='nav_link_name' >Sales</span>
-            </a>
+            </div>
         </li>
         {/*  */}
         <li onMouseEnter={() => setconferenceSubBar(true)} onMouseLeave={() => setconferenceSubBar(false)}>
-            <a href="/">
+            <div>
             <i class="fa-solid fa-people-roof"></i>
                 <span className='nav_link_name' >Conference </span>
-            </a>
+            </div>
             <ul className='sub_nav-list' style={{ display: conferenceSubBar ? 'block' : 'none' }}>
                 <li> 
                      <a href="/Enquiry" >
@@ -99,7 +101,7 @@ export const SideNavbar = () => {
                 <li> 
                      <a href="/EnquiryDetieal" >
                      <i class="fa-regular fa-rectangle-list"></i> 
-                     <span className='nav_link_name' >Enquiry</span>
+                     <span className='nav_link_name' >Enquiry Contacts</span>
                      </a> 
                 </li>
                 <li> 
@@ -112,10 +114,10 @@ export const SideNavbar = () => {
            
         </li>
         <li onMouseEnter={() => setaccountSubBar(true)} onMouseLeave={() => setaccountSubBar(false)}>
-            <a href="/">
+            <div>
             <i className='bx bx-rupee' ></i>
                 <span className='nav_link_name' >Account</span>
-            </a>
+            </div>
             <ul className = "sub_nav-list" style={{ display: accountSubBar ? 'block' : 'none' }}>
                 <li> 
                      <a href="/account" >
@@ -132,28 +134,28 @@ export const SideNavbar = () => {
              </ul>
         </li>
         <li>
-            <a href="/">
+            <div>
             <i className='bx bx-grid-alt'></i>
                 <span className='nav_link_name' >Service</span>
-            </a>
+            </div>
         </li>
         <li>
-            <a href="/">
+            <div>
             <i className='bx bx-cog' ></i>
                 <span className='nav_link_name' >Production</span>
-            </a>
+            </div>
         </li>
         <li>
-            <a href="/">
+            <div>
             <i className='bx bxs-user-circle' ></i>
                 <span className='nav_link_name' >HR</span>
                
-            </a>
+            </div>
        
         </li>
         <div className="profile">
             <div className="profile_details">
-                <img src="https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png" alt="user" />
+                <img className='userimg' src="https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png" alt="user" />
                 <div>
                     <div className="profile_name">{userName}</div>
                     <div className="desingnations">{userEmail}</div>

@@ -1,4 +1,4 @@
-import React ,{useContext, useEffect, useState, useRef, useCallback} from 'react' 
+import React ,{useContext, useEffect, useState, useRef} from 'react' 
 import {   Formik , Field, Form} from 'formik';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EnquirySchema } from '../../EnquiryValidations/Enquiryvalidation';
@@ -15,24 +15,23 @@ import axiosInstance from '../../../api/axoiss';
 import DataContext from '../../../context/ItemMasterContext'; 
 import TextEditer from '../../../components/textEditer/TextEditer';
 import Tesseract from 'tesseract.js';
-import compromise from 'compromise'; 
-import CameraComponent from '../../../components/cameraComponent/CameraComponent';
+import compromise from 'compromise';  
 
 const EnquiryFrom = () => {
   
-    const {setEnquiry,     currentConference, userName,   setExtractData} = useContext(DataContext)
+    const {setEnquiry,     currentConference, userName,   setExtractData, Navigate} = useContext(DataContext)
      
     const [textEditer_, settextEditer_] = useState(true)
     const [selectedFile, setSelectedFile] = useState(null);
-    
-    
-    const webcamRef = useRef(null);
-
-    const [isCameraStarted, setIsCameraStarted] = useState(false);
-
-    const startCamera = () => {
-      setIsCameraStarted(true);
+    const [isCollapseOpen, setIsCollapseOpen] = useState(false);
+     
+    const handleCollapse = () => {
+      setIsCollapseOpen(!isCollapseOpen);
+ 
     };
+
+    const toastId = useRef(null)
+
     const extractInfoFromImage = async (image) => {
   
       try {
@@ -40,14 +39,24 @@ const EnquiryFrom = () => {
         //   console.error('No file selected');
         //   return;
         // }
+        toastId.current = toast.loading("Loading...") 
         const { data: { text } } = await Tesseract.recognize(
           selectedFile,
           'eng', // Language code for English
-          { logger: (info) => console.log(info) } // Optional logger
+          { logger: (info) => console.log(info)
+            } // Optional logger
         );
+        
         setExtractData(text)
         const lines = text.split(/\n+/);
         const doc = compromise(text);
+        toast.update(toastId.current, {
+          render: `Text recognized`,
+          type: 'success',
+          isLoading: false,
+          autoClose: 800,
+        });
+      
   
         const extractedInfo = {
           name: '',
@@ -116,26 +125,23 @@ const EnquiryFrom = () => {
         
         console.log('Extracted Information:', extractedInfo)
         console.log(text);
-        
+        handleClearFile()
         
         
     
          
         // }
       } catch (error) {
-        console.error('Error processing business card image:', error);
+        toast.update(toastId.current, {
+          render: 'Error during recognition',
+          type: 'error',
+          isLoading: false,
+        });
       }
     };
+   
 
-
-    const capture = useCallback(() => {
-      if (webcamRef.current) {
-        const imageSrc = webcamRef.current.getScreenshot();
-        // Do something with the captured image
-        // console.log(imageSrc);
-        extractInfoFromImage(imageSrc)
-      }
-    },[webcamRef, extractInfoFromImage]);
+ 
 
     const handletextedtier = ()=>{
       settextEditer_(!textEditer_)
@@ -144,10 +150,19 @@ const EnquiryFrom = () => {
       const file = event.target.files[0];
       setSelectedFile(file);
     };
+    const handleClearFile = () => {
+      setSelectedFile('');
+      // Clear the input field visually by setting its value to an empty string
+      const fileInput = document.getElementById('fileInput'); // Assuming the id of the input is 'fileInput'
+      if (fileInput) {
+        fileInput.value = '';
+      }
+    };
     const [initialValues, setinitialValues]  = useState({
       name:"",
       Hospital :"",
       email :"",
+      alternateMobileNumber : "",
       Mobile :"",
       locations :"",
       message :"",
@@ -1271,7 +1286,9 @@ const EnquiryFrom = () => {
     handlphoneChange("")
     handlOrgChange("")
     handlOrgChange("")
-    setSelectLocations(  );
+    setSelectLocations( { value: "" , label:  "" });
+    setAlterPhone('')
+    // setinitialValues('')
 
 
   }
@@ -1295,17 +1312,23 @@ const EnquiryFrom = () => {
       "Name": values['name'],
       "OrganizationName": values["Hospital"],
       "Email": values['email'],
+      "alternateMobileNumber" : values['alternateMobileNumber'],
       "status": "Not Contacted",
       "MobileNumber":  values['Mobile'],
       "Location":   values['locations'],
       "message": values['message'],
       "conferencedata":Conferenceid,
       "Interesteds":  values['intrested'],
+      "Remarks": null,
+      "followup": null,
+      "salesPerson": null,
    }  
+  //  alternateMobileNumber
    try{
     const respones = await  axiosInstance.post('/api/', save_enquiry_from);
     const responseData = Array.isArray(respones.data) ? respones.data : [respones.data];
-    setEnquiry(responseData)
+    setEnquiry((prevData) => [...prevData, ...responseData]);
+
     setExtractData("")
     reset_From()
    
@@ -1313,7 +1336,7 @@ const EnquiryFrom = () => {
 
     toast('Thank you so much for your enquiry. Our salesperson will be in touch with you shortly.', {
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 800,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
@@ -1326,7 +1349,7 @@ const EnquiryFrom = () => {
     console.log(`Error: ${error.message}`);
     toast.error(`${error.message}`, {
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -1351,23 +1374,23 @@ const EnquiryFrom = () => {
   const handlphoneChange = (value)=>{
     setPhone(value)
   }
+  const [alterPhone, setAlterPhone] = useState('')
+  const handlalterphoneChange = (value)=>{
+    setAlterPhone(value)
+  }
   const [org, setOrg] = useState('')
   const handlOrgChange = (value)=>{
     setOrg(value)
   }
   
-
   const [selectLocations , setSelectLocations] = useState('')
   const handleSelectLocations =(option)=>{
     setSelectLocations( { value: option.value , label:  option.label });
   }
-  const videoConstraints = {
-    facingMode: 'environment', // or 'user' for front camera
-    deviceId: backCamera ? { exact: backCamera.deviceId } : undefined,
-  };
+ 
     return (
         <>
-         {isCameraStarted ? <CameraComponent webcamRef ={webcamRef} capture ={capture}  videoConstraints={videoConstraints} setIsCameraStarted={setIsCameraStarted}/>: ""}
+         
            <div className="wrap   container-md mt-4 ">
     
             <div className='top_div shadow-lg px-4    container-sm   bg-white  container        '>
@@ -1375,8 +1398,8 @@ const EnquiryFrom = () => {
             <div className='header'>
              <img src={staanlogo} className="img-thumbnail" alt="staan logo"/>
              <h3 className="title  ">{ConferenceName ? ConferenceName :"ENQUIRY FORM" } </h3>
-             <i className ="fa-solid fa-camera me-2" onClick={startCamera}></i>
-             <i className ="fa-regular fa-pen-to-square" onClick={handletextedtier}></i>
+            
+           
              </div>
            
                <Formik   initialValues=  {initialValues}
@@ -1434,6 +1457,7 @@ const EnquiryFrom = () => {
                        <br/>
                        {  touched.Mobile && errors.Mobile && <small>{errors.Mobile}</small>}
                        </div>
+                     
                       
                        <div className="col-12  col-md-6 text-start mt-md-3 ">
                        <label htmlFor="Location" className='form-label   lable-sub  ps-1 '>City</label>
@@ -1477,6 +1501,19 @@ const EnquiryFrom = () => {
                        <br/>
                        
                        { touched.message && errors.message && <small>{errors.message}</small>}
+                       </div>
+                       <div className="col-6"></div>
+                       <div className="col-12  col-md-6  text-start   ">
+                       <label htmlFor="MobileNumber" className='form-label  text-start d-flex flex-nowrap lable-sub ps-1'>Alternate Mobile Number</label>
+                       <Field type='text' name='alternateMobileNumber' 
+                       value={alterPhone} 
+                       onChange={(e)=>{
+                          setFieldValue("alternateMobileNumber" ,e.target.value )
+                          handlalterphoneChange(e.target.value)
+                       }}  placeholder=' ' className='w-100 input-trenprant no-spinners '    />
+                        
+                       <br/>
+                       {  touched.alternateMobileNumber && errors.alternateMobileNumber && <small>{errors.alternateMobileNumber}</small>}
                        </div>
 
                        <div className="row icons_of_product  mt-1 ">
@@ -1555,19 +1592,61 @@ const EnquiryFrom = () => {
                    <button type="submit" className="btn shadow-sm  enquiry_submit_button"   >Submit</button>
                     
                    </div>
-                   <div className='text-end text-secondary fs-6 fw-bold'>
-                   {userName}
-                   </div>
+                   <div
+            className='text-end text-secondary fs-6 fw-bold'
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample"
+            role="button"
+            aria-expanded={isCollapseOpen}
+            aria-controls="collapseExample"
+            onClick={() => handleCollapse()}
+            
+          >   
+            {userName}
+          </div>
+
                   
                    </Form>) }
                
                </Formik>
                </div>
-               <input type="file" onChange={handleFileChange} />
-               <button onClick={()=>{extractInfoFromImage()}}>get data </button>
+               <div  className={`mt-2 collapse ${isCollapseOpen ? 'show' : ''}`} id="collapseExample">
+                <div className="card card-body">
+                  <div className="row">
+                          <div className="col-5">
+  
+
+                          <input type="file" className='form-control' id='fileInput'   onChange={handleFileChange} />
+                          </div>
+                          <div className="col-5">
+                          <button
+                              className='btn btn-outline-success'
+                              disabled={!selectedFile} 
+                              onClick={() => extractInfoFromImage()}
+                            >
+                              Get Data
+                            </button>
+                          </div>
+                          <div className="col-2 mt-2">
+                          <i class="fa-solid fa-circle-xmark pe-2" onClick={handleClearFile}></i>
+                          <i className ="fa-regular fa-pen-to-square pe-2" onClick={handletextedtier}></i>
+                          <i class="fa-solid fa-house" onClick={()=>{Navigate("/EnquiryDetieal")}}></i>
+                          </div>
+                  </div>
+                   
+                 
+                </div>
+               
+                
+               </div>
+              
+              
            
            </div>
            <div className='textEdit ' hidden={textEditer_}>
+            <div className="row text-end pe-3">
+            <i class="fa-solid fa-circle-xmark " onClick={handletextedtier}></i>
+            </div>
            <TextEditer/>
            </div>
            
