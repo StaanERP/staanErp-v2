@@ -240,12 +240,13 @@ const EnquiryTable = () => {
                     </div>
                 </div>
             </div>
-            <div className='ag-theme-alpine mx-3   ' style={{ height: "80%", width: "100%" }}>
+            <div className='ag-theme-alpine mx-3   ' style={{ height: "90%", width: "100%" }}>
             <AgGridReact
             rowData={post}
             columnDefs={colums}
             defaultColDef={defaultColDef} 
             pagination={true}
+            paginationPageSize = {16}
             components={components}
             style={{ overflowX: 'auto' }}
             />

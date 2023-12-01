@@ -24,6 +24,7 @@ const EnquiryFrom = () => {
     const [textEditer_, settextEditer_] = useState(true)
     const [selectedFile, setSelectedFile] = useState(null);
     const [isCollapseOpen, setIsCollapseOpen] = useState(false);
+    
      
     const handleCollapse = () => {
       if (isCollapseOpen == "show"){
@@ -1343,7 +1344,7 @@ const EnquiryFrom = () => {
    try{
     const respones = await  axiosInstance.post('/api/', save_enquiry_from);
     const responseData = Array.isArray(respones.data) ? respones.data : [respones.data];
-    setEnquiry((prevData) => [...prevData, ...responseData]);
+    setEnquiry((prevData) => [...responseData , ...prevData]);
 
     setExtractData("")
     reset_From()
