@@ -147,7 +147,7 @@ export const DataProvider = ({children})=>{
             });
        
             if (loginResponse.accessToken) {
-              Navigate("/ItemMaster") 
+              Navigate("/Enquiry") 
               localStorage.setItem('access_token', loginResponse.accessToken);
               localStorage.setItem('Name', loginResponse.account.name);
               localStorage.setItem('Email', loginResponse.account.username);
