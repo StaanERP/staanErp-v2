@@ -126,7 +126,7 @@ const EnquiryFromEdit = ({enquiryEditFrom, handleenquiryEditFromClose, enquiryEd
   return (
     <>
      <ToastContainer/>
-     <Modal show={enquiryEditFrom}  size="lg" onHide={()=>{
+     <Modal show={enquiryEditFrom}  size="xl" onHide={()=>{
         handleenquiryEditFromClose()
         resetData()
      }}>

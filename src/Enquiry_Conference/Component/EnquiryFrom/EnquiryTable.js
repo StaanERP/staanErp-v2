@@ -14,7 +14,7 @@ const EnquiryTable = () => {
     const navigate = useNavigate();
     const [post, setPost] =  useState('')
     const [enquiryEdit, setEnquiryEdit] = useState('')
-
+    const [pageSize, setPageSize] = useState(10);
     
    
  
@@ -226,6 +226,11 @@ const EnquiryTable = () => {
 
     const handleenquiryEditFromClose = () => setEnquiryEditFrom(false);
     const handleenquiryEditFromShow = () => setEnquiryEditFrom(true);
+    const handlePageSizeChange = (event) => {
+      const newSize = parseInt(event.target.value, 10);
+      setPageSize(newSize);
+      // gridOptions.api.paginationSetPageSize(newSize);
+    };
   return (
     <>
        <SideNavbar/>
@@ -239,18 +244,29 @@ const EnquiryTable = () => {
                         <button type="button" className="btn btn-outline-primary" onClick={handleButtonClick}  ><i class='bx bxs-plus-circle' ></i> New</button>
                     </div>
                 </div>
+                
             </div>
-            <div className='ag-theme-alpine mx-3   ' style={{ height: "90%", width: "100%" }}>
+            <div className='ag-theme-alpine mx-3 enquiryTable  ' style={{ height: "80%", width: "100%" }}>
             <AgGridReact
             rowData={post}
             columnDefs={colums}
             defaultColDef={defaultColDef} 
             pagination={true}
-            paginationPageSize = {16}
+            paginationPageSize = {pageSize}
             components={components}
             style={{ overflowX: 'auto' }}
             />
+              <div className='Rows_per_page' >
+                  <label htmlFor="pageSizeSelect " className='fw-bolder'>Rows per page:</label>
+                  <select id="pageSizeSelect" className='pageSizeSelect' value={pageSize} onChange={handlePageSizeChange}>
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                    <option value={50}>50</option>
+                    {/* Add more options as needed */}
+                  </select>
+              </div>
             </div> 
+          
             
             
 
@@ -260,7 +276,7 @@ const EnquiryTable = () => {
       handleenquiryEditFromClose = {handleenquiryEditFromClose}
       enquiryEdit = {enquiryEdit}
       />
-
+      
       
     </>
   )

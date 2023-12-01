@@ -1464,7 +1464,7 @@ const EnquiryFrom = () => {
                        </div>
                        
                        <div className="col-12  col-md-6  text-start mt-md-3 ">
-                       <label htmlFor="MobileNumber" className='form-label  text-start d-flex flex-nowrap lable-sub ps-1'>Mobile Number</label>
+                       <label htmlFor="MobileNumber" className='form-label  text-start d-flex flex-nowrap lable-sub ps-1'>Mobile</label>
                        <Field type='text' name='Mobile' value={phone} onChange={(e)=>{
                           setFieldValue("Mobile" ,e.target.value )
                           handlphoneChange(e.target.value)
@@ -1635,10 +1635,10 @@ const EnquiryFrom = () => {
                           </div>
                           <div className="col-3 pe-1 col-md-2 mt-2">
                           
-                          <i className ="fa-regular fa-pen-to-square pe-2" onClick={()=>{
+                          <i className ="fa-regular fa-pen-to-square fa-xl pe-3" onClick={()=>{
                            handletextedtier()
                           }}></i>
-                                      <i class="fa-regular fa-circle-xmark" onClick={()=>{
+                                      <i class="fa-regular fa-circle-xmark fa-xl" onClick={()=>{
             setIsCollapseOpen('')
           }}></i>
                          

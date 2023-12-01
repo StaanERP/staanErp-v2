@@ -221,6 +221,19 @@
     margin-left: 10% !important; 
     margin-right: 5% !important;
   }
+
+  .enquiryTable{
+    position:relative;
+  }
+  .pageSizeSelect{
+    border-radius: 10px;
+    margin-left: 5px;
+  }
+  .Rows_per_page{
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+  }
  
   
 
