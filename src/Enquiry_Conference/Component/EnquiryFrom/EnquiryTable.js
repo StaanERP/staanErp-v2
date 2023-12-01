@@ -116,19 +116,13 @@ const EnquiryTable = () => {
          
       },
       {
-        headerName:'Mobile Number' , 
+        headerName:'Mobile' , 
         field:"MobileNumber",
         editable: false , 
         headerClass: 'center-header'
        
     },
-    {
-      headerName:'Alternate Number' , 
-      field:"alternateMobileNumber",
-      editable: false , 
-      headerClass: 'center-header'
-     
-  },
+    
     {
         headerName:'City' , 
         field:"Location",
