@@ -38,8 +38,7 @@ function App({msalInstance}) {
       <Route path='/account' element={<AccountMasterlist/>}/>  
       <Route path='/account_Group' element={<AccountGroup/>}/>
       <Route path='/Enquiry' element={<EnquiryFrom/>}/> 
-      <Route path='/EnquiryDetieal' element={<EnquiryTable/>}/> 
-      
+      <Route path='/EnquiryDetieal' element={<EnquiryTable/>}/>
       <Route path='/conference' element={<Conference/>}/> 
       <Route path='/StockStement' element={<StockStement/>}/> 
       <Route path='/inventoryApproval' element={<InventoryApprovals/>}/> 

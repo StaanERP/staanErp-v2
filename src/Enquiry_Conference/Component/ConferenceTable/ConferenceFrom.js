@@ -38,6 +38,15 @@ const ConferenceFrom = ({handleConferenceFromClose,AddConference, conferenceEdit
     initialConferenceValues.enddate = ""
     initialConferenceValues.Status = false
   }
+  if (conferenceEdit === "forinitial"){
+    setInitialConferenceValues(
+      { name:"",
+      Startdate: "",
+      enddate: "",
+      incharge: "",
+      Status : false,}
+    )
+  }
 
   useEffect(()=>{
     if(initialConferenceValues.incharge){

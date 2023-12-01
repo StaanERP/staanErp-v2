@@ -24,11 +24,19 @@ const AddAccount = ({accountEditId, setAccountEditId}) => {
    })
 
    if(accountEditId){ 
-    initialAccount.Name =  accountEditId['Accounts_Name']
-    initialAccount.Group =  accountEditId['Accounts_Group_Name']
-    initialAccount.Gst =  accountEditId['GST_Applicable']
-    initialAccount.tds =  accountEditId['TDS']
-    initialAccount.Active =  accountEditId['Accounts_Active']
+    // initialAccount.Name =  accountEditId['Accounts_Name']
+    // initialAccount.Group =  accountEditId['Accounts_Group_Name']
+    // initialAccount.Gst =  accountEditId['GST_Applicable']
+    // initialAccount.tds =  accountEditId['TDS']
+    // initialAccount.Active =  accountEditId['Accounts_Active']
+    setInitialAccount({
+      Name : "",
+        Active : true,
+        Gst : false,
+        tds: false, 
+        Group: '',
+        modified_by: 10
+   })
    }
  
    function reset_form(){ 

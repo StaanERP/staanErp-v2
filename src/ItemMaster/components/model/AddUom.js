@@ -38,12 +38,16 @@ const AddUom = ({uomEditId, setuomEditId}) => {
   function reset_form(){ 
 
     setEwaybillUOM( { value: "" , label:  "" });
-    initialUom.name = ''
-    initialUom.e_way_bill_uom = ''
-    initialUom.Description = ''
-    initialUom.modified_by = 1  
-
-
+    // initialUom.name = ''
+    // initialUom.e_way_bill_uom = ''
+    // initialUom.Description = ''
+    // initialUom.modified_by = 1
+    setInitialUom(  {
+      "name": "",
+      "e_way_bill_uom": "",
+      "Description": "",
+      "modified_by": 1
+    })
 }
 
  useEffect(()=>{

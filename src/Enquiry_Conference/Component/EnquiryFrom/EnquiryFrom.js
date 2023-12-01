@@ -26,7 +26,12 @@ const EnquiryFrom = () => {
     const [isCollapseOpen, setIsCollapseOpen] = useState(false);
      
     const handleCollapse = () => {
-      setIsCollapseOpen(!isCollapseOpen);
+      if (isCollapseOpen == "show"){
+        
+      }else{
+        setIsCollapseOpen("show");
+      }
+      
  
     };
 
@@ -168,6 +173,7 @@ const EnquiryFrom = () => {
       message :"",
       intrested: []
   })
+ 
      
  
 
@@ -1276,11 +1282,21 @@ const EnquiryFrom = () => {
 {value : "Zunheboto" ,  label : "Zunheboto"} 
   ]
   function reset_From(){
-    initialValues.name =  ""
-    initialValues.Hospital =  ""
-    initialValues.email =  ""
-    initialValues.Mobile =  ""
-    initialValues.locations =   ""
+    // initialValues.name =  ""
+    // initialValues.Hospital =  ""
+    // initialValues.email =  ""
+    // initialValues.Mobile =  ""
+    // initialValues.locations =   ""
+    setinitialValues({
+      name:"",
+      Hospital :"",
+      email :"",
+      alternateMobileNumber : "",
+      Mobile :"",
+      locations :"",
+      message :"",
+      intrested: []
+    })
     handlenameChange("")
     handlemailChange("")
     handlphoneChange("")
@@ -1398,7 +1414,7 @@ const EnquiryFrom = () => {
             <div className='header'>
              <img src={staanlogo} className="img-thumbnail" alt="staan logo"/>
              <h3 className="title  ">{ConferenceName ? ConferenceName :"ENQUIRY FORM" } </h3>
-            
+             <i class="fa-solid fa-house" onClick={()=>{Navigate("/EnquiryDetieal")}}></i>
            
              </div>
            
@@ -1502,19 +1518,7 @@ const EnquiryFrom = () => {
                        
                        { touched.message && errors.message && <small>{errors.message}</small>}
                        </div>
-                       <div className="col-6"></div>
-                       <div className="col-12  col-md-6  text-start   ">
-                       <label htmlFor="MobileNumber" className='form-label  text-start d-flex flex-nowrap lable-sub ps-1'>Alternate Mobile Number</label>
-                       <Field type='text' name='alternateMobileNumber' 
-                       value={alterPhone} 
-                       onChange={(e)=>{
-                          setFieldValue("alternateMobileNumber" ,e.target.value )
-                          handlalterphoneChange(e.target.value)
-                       }}  placeholder=' ' className='w-100 input-trenprant no-spinners '    />
                         
-                       <br/>
-                       {  touched.alternateMobileNumber && errors.alternateMobileNumber && <small>{errors.alternateMobileNumber}</small>}
-                       </div>
 
                        <div className="row icons_of_product  mt-1 ">
                        <Swiper
@@ -1522,7 +1526,6 @@ const EnquiryFrom = () => {
                            spaceBetween={30}
                            pagination={{
                              clickable: true,
-                             
                            }}
                             
                            modules={[Pagination]}
@@ -1593,32 +1596,34 @@ const EnquiryFrom = () => {
                     
                    </div>
                    <div
-            className='text-end text-secondary fs-6 fw-bold'
+            className='text-end text-secondary fs-6 fw-bold  '
             data-bs-toggle="collapse"
             data-bs-target="#collapseExample"
             role="button"
-            aria-expanded={isCollapseOpen}
+            aria-expanded={isCollapseOpen === "show" ? true: false}
             aria-controls="collapseExample"
-            onClick={() => handleCollapse()}
+            onClick={() =>{ handleCollapse();
+            }}
             
-          >   
-            {userName}
+          >  
+          <p className='pb-2 ps-2'>     {userName} </p>
           </div>
+          
 
                   
                    </Form>) }
                
                </Formik>
                </div>
-               <div  className={`mt-2 collapse ${isCollapseOpen ? 'show' : ''}`} id="collapseExample">
+               <div  className={`mt-2 collapse ${  isCollapseOpen  }`} id="collapseExample">
                 <div className="card card-body">
                   <div className="row">
-                          <div className="col-5">
+                          <div className="col-md-5 col-5">
   
 
                           <input type="file" className='form-control' id='fileInput'   onChange={handleFileChange} />
                           </div>
-                          <div className="col-5">
+                          <div className="col-md-5 col-4">
                           <button
                               className='btn btn-outline-success'
                               disabled={!selectedFile} 
@@ -1627,10 +1632,15 @@ const EnquiryFrom = () => {
                               Get Data
                             </button>
                           </div>
-                          <div className="col-2 mt-2">
-                          <i class="fa-solid fa-circle-xmark pe-2" onClick={handleClearFile}></i>
-                          <i className ="fa-regular fa-pen-to-square pe-2" onClick={handletextedtier}></i>
-                          <i class="fa-solid fa-house" onClick={()=>{Navigate("/EnquiryDetieal")}}></i>
+                          <div className="col-3 pe-1 col-md-2 mt-2">
+                          
+                          <i className ="fa-regular fa-pen-to-square pe-2" onClick={()=>{
+                           handletextedtier()
+                          }}></i>
+                                      <i class="fa-regular fa-circle-xmark" onClick={()=>{
+            setIsCollapseOpen('')
+          }}></i>
+                         
                           </div>
                   </div>
                    
@@ -1646,6 +1656,8 @@ const EnquiryFrom = () => {
            <div className='textEdit ' hidden={textEditer_}>
             <div className="row text-end pe-3">
             <i class="fa-solid fa-circle-xmark " onClick={handletextedtier}></i>
+
+       
             </div>
            <TextEditer/>
            </div>

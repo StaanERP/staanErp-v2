@@ -30,9 +30,9 @@
     padding-right: 10%;
   }
      .header img{
-      height: 20%;
-      width: 20%;
-      margin-top: 15px;
+      height: 25%;
+      width: 25%;
+      margin-top: 5px;
       border: 1px solid #ffff;
       justify-content: flex-start;
   }
@@ -217,7 +217,10 @@
     padding-left: 10%;
     padding-right: 10%;
   }
-  
+  .sidemargin{
+    margin-left: 10% !important; 
+    margin-right: 5% !important;
+  }
  
   
 
@@ -334,7 +337,7 @@
       height: 100px;  
     }
     .header img{
-      margin-left: 23px;
+      margin-left: 0px;
   }
   .header .title{
      

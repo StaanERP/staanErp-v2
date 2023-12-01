@@ -27,9 +27,14 @@ const AddItemGroup = ({itemGroupEditId,setitemGroupEditId }) => {
     initialGroup.Group = itemGroupEditId['Parent_Group']
   }
   if(itemGroupEditId === ""){
-    initialGroup.Name =  ""
-    initialGroup.Hsn =  ""
-    initialGroup.Group =  ""
+    // initialGroup.Name =  ""
+    // initialGroup.Hsn =  ""
+    // initialGroup.Group =  ""
+    setinitialGroup({
+      Name :"",
+      Hsn: "",
+      Group: "",
+  })
   }
   useEffect(()=>{
     if(initialGroup.Hsn){

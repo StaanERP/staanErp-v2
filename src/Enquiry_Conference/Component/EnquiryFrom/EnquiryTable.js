@@ -235,7 +235,7 @@ const EnquiryTable = () => {
   return (
     <>
        <SideNavbar/>
-       <div className='container-xxl'>
+       <div className='container-xxl sidemargin m-0 p-0'>
             <div className="itemMaster_Top mx-3 mt-3" style={{   width: "100%" }}>
                 <div className="row py-3 ps-3">
                     <div className="col-6">

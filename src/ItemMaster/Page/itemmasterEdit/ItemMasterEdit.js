@@ -153,8 +153,48 @@ const ItemMasterEdit = () => {
             item_qc:false, 
         }
     )
-// 
-   
+    const forter = ""
+    if (forter === "forter"){
+        setInitialMaster(
+            {
+                Item_PartCode: "",
+                Item_name: "",
+                Description: "",
+                Item_Group: null,
+                Item_type: null,
+                Item_UOM: null ,
+                Alternate_uom: [],
+                category: null,
+                Item_Indicator: null,
+                Item_Cost: "0",
+                Purchase_uom:"",
+                Item_Safe_Stock:0,
+                Item_Order_Qty: 0,
+                Item_Leadtime: 0,
+                Item_Purchase_Account: "",
+                Item_Mrp:0,
+                Item_min_price:0,
+                Item_Sales_Account:"",
+                Item_HSN: null,
+                Keep_stock:false,
+                serial:false ,
+                serial_auto_gentrate:false,
+                Serial_format:"",
+                Serial_starting:0  ,
+                Batch_number:false,
+                Service:false ,
+                Warranty_Require: false,
+                Item_Warranty_based: '',
+                Item_Installation: false,
+                Item_Combo:false,
+                item_Combo_data:[],
+                Item_Barcode:false,
+                Item_Active:true,
+                item_qc:false, 
+            }
+        )
+    }
+     
     useEffect(()=>{
         async function getitemmasterdata (){
             const response = await axiosInstance.get(`/itemmaster/ItemMaster/${id}`)

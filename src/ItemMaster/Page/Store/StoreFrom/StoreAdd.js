@@ -37,13 +37,32 @@ if (storeEditId) {
     initialStore.matained = selectedStore['matained'] 
     initialStore.Action = selectedStore['Action']
 }
-if(storeEditId === ""){
-    initialStore.StoreName =  ""
-    initialStore.StoreAccount = ""
-    initialStore.StoreInCharge = ""
-    initialStore.matained = false
-    initialStore.Action = true
-   
+useEffect(() => {
+  if (storeEditId === "") {
+    setinitialStore({
+      "StoreName": "",
+      "matained": false,
+      "Action": true,
+      "StoreAccount": '',
+      "StoreInCharge": ''
+    });
+  }
+}, [storeEditId]);
+// initialStore.StoreName =  ""
+    // initialStore.StoreAccount = ""
+    // initialStore.StoreInCharge = ""
+    // initialStore.matained = false
+    // initialStore.Action = true
+if (storeEditId === "storeEditId"){
+  setinitialStore(
+    {
+      "StoreName": "",
+      "matained": false,
+      "Action": true,
+      "StoreAccount": '',
+      "StoreInCharge": ''
+}
+  )
 }
 function reset_form(){ 
 

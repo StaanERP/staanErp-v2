@@ -25,10 +25,16 @@ const AddAccountGroup = ({AccountEdit, setAccountEdit}) => {
           
       }  
       if(AccountEdit === ""){
-        initialgroup.Accounts_Group_Name =  ''
-        initialgroup.Accounts_Type = ""
-        initialgroup.Group_Active = false
-        initialgroup.modified_by = "" 
+        // initialgroup.Accounts_Group_Name =  ''
+        // initialgroup.Accounts_Type = ""
+        // initialgroup.Group_Active = false
+        // initialgroup.modified_by = ""
+        setinitialgroup({
+          Accounts_Group_Name : "",
+          Accounts_Type : "",
+          Group_Active : true,
+          modified_by : 10
+      }) 
       }
       function reset_form(){ 
         if (AccountEdit){
