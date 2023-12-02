@@ -6,7 +6,7 @@ import DataContext from '../../../context/ItemMasterContext';
 import { SideNavbar } from '../../../components/sideNavbar/SideNavbar';
 import ConferenceFrom from './ConferenceFrom';
 import DeleteConformation from '../../../components/deleteConformations.js/DeleteConformation';
- 
+import "./Style.css"
  
 
 const Conference = () => {
@@ -142,7 +142,7 @@ const Conference = () => {
     return (
     <>
     <SideNavbar/>
-    <div className='container-lg'>
+    <div className='container-lg sidemargin'>
             <div className="itemMaster_Top mx-3 mt-3" style={{   width: "100%" }}>
                 <div className="row py-3 ps-3">
                     <div className="col-6">

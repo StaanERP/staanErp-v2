@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'   
-// import { ToastContainer,} from 'react-toastify';
+import { ToastContainer,} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import "./login.css"
 import DataContext from '../../context/ItemMasterContext';
@@ -13,7 +13,7 @@ const Login = () => {
  
   return (
     <>
-     {/* <ToastContainer/> */}
+     <ToastContainer/>
     <div className='top_div shadow-lg px-4 py-4  container-sm    loginDiv container-lg  m-auto justify-content-end '>
          
          <div className='header'>

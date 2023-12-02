@@ -231,7 +231,7 @@ useEffect( ()=>{
 
     }
   }
-},[AlternateUomAdd, values.Alternate_uom, getAlterUOMData])
+},[AlternateUomAdd, values.Alternate_uom])
  
 
 

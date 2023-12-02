@@ -24,11 +24,14 @@ const AddAccount = ({accountEditId, setAccountEditId}) => {
    })
 
    if(accountEditId){ 
-    // initialAccount.Name =  accountEditId['Accounts_Name']
-    // initialAccount.Group =  accountEditId['Accounts_Group_Name']
-    // initialAccount.Gst =  accountEditId['GST_Applicable']
-    // initialAccount.tds =  accountEditId['TDS']
-    // initialAccount.Active =  accountEditId['Accounts_Active']
+    initialAccount.Name =  accountEditId['Accounts_Name']
+    initialAccount.Group =  accountEditId['Accounts_Group_Name']
+    initialAccount.Gst =  accountEditId['GST_Applicable']
+    initialAccount.tds =  accountEditId['TDS']
+    initialAccount.Active =  accountEditId['Accounts_Active']
+
+   }
+   useEffect(()=>{
     setInitialAccount({
       Name : "",
         Active : true,
@@ -37,7 +40,7 @@ const AddAccount = ({accountEditId, setAccountEditId}) => {
         Group: '',
         modified_by: 10
    })
-   }
+   },[accountEditId])
  
    function reset_form(){ 
 

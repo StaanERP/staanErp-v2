@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import EnquiryFromEdit from './EnquiryFromEdit';
 import "./Enquirystyle.css" 
 
+
 const EnquiryTable = () => {
     const {enquiry,   conferenct,userdata} = useContext(DataContext)
     const navigate = useNavigate();
@@ -93,7 +94,20 @@ const EnquiryTable = () => {
           field:'status',editable:false,
           cellEditor: 'agSelectCellEditor',
           width: 150,
-          headerClass: 'center-header'
+          headerClass: 'center-header',
+          cellStyle: function(params) {
+            // Adjust the condition based on your requirements
+            if (params.value === 'Not Contacted') {
+              return { backgroundColor: '', color: 'red' };
+            } else if (params.value === 'Converted') {
+              return { backgroundColor: '', color: 'green' };
+            } else if (params.value === 'Junk') {
+              return { backgroundColor: '', color: 'Yellow' };
+            } else {
+              // Default styling for other values
+              return null;
+            }
+          },
        
           // cellEditorParams: {
           //   values: ['Not Contacted', 'Converted', 'Junk'],
@@ -147,10 +161,14 @@ const EnquiryTable = () => {
         headerClass: 'center-header'
     },
     {
-      headerName:'Sales Person' , 
-      field: "salesmana_name",
-      editable: false , 
-      headerClass: 'center-header'
+      headerName: 'Sales Person',
+      field: 'salesmana_name',
+      editable: false,
+      headerClass: 'center-header',
+      // filterFramework: CustomSelectFilter,
+      // filterParams: {
+      //   applyMiniFilterWhileTyping: true,
+      // },
     },
     {
       headerName:'Follow up' , 

@@ -26,16 +26,16 @@ const AddItemGroup = ({itemGroupEditId,setitemGroupEditId }) => {
     initialGroup.Hsn = itemGroupEditId['hsn']
     initialGroup.Group = itemGroupEditId['Parent_Group']
   }
-  if(itemGroupEditId === ""){
-    // initialGroup.Name =  ""
-    // initialGroup.Hsn =  ""
-    // initialGroup.Group =  ""
-    setinitialGroup({
-      Name :"",
-      Hsn: "",
-      Group: "",
-  })
-  }
+  useEffect(()=>{
+    if(itemGroupEditId === ""){
+      setinitialGroup({
+        Name :"",
+        Hsn: "",
+        Group: "",
+    })
+    }
+  },[itemGroupEditId])
+
   useEffect(()=>{
     if(initialGroup.Hsn){
       const defaultSelectedHsn = ItemHsndata.find(item=> item.id === initialGroup.Hsn )

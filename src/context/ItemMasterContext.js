@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
- 
+import {   toast } from 'react-toastify';
 import axiosInstance from "../api/axoiss";
 import {BASE_URL} from "../ApiDomain"
 import {initializeMsal} from "../msalUtils"
@@ -89,6 +89,7 @@ export const DataProvider = ({children})=>{
       useEffect(() => {
         const initialize = async () => {
           const instance = await initializeMsal();
+          console.log(instance,"instance");
           setMsalInstance(instance);
           setLoading(false);
         };
@@ -140,6 +141,7 @@ export const DataProvider = ({children})=>{
       };
 
       const login = async () => {
+        console.log(msalInstance,"msalInstance");
         try {
           if (msalInstance) {
             const loginResponse = await msalInstance.loginPopup({
@@ -167,12 +169,25 @@ export const DataProvider = ({children})=>{
         } catch (error) {
           // Handle login error
           console.error('Login Error:', error);
+          const errorString = error.toString();
+          if (errorString.includes("BrowserAuthError: interaction_in_progress")) {
+            toast.error('Try login new tab we will fix this error in next update ', {
+              position: "top-center",
+              autoClose: 7000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
+          }
          
         }
       };
       const logout = async () => {
         try {
-         
+          
           if (msalInstance) {
             localStorage.setItem('Name', "");
             localStorage.setItem('Email', "");
@@ -183,11 +198,13 @@ export const DataProvider = ({children})=>{
             setUserId('')
             Navigate("/")
             await msalInstance.logout();
+            await login();
             
           }
         } catch (error) {
           // Handle logout error
           console.error('Logout Error:', error);
+         
         }
       };
 
