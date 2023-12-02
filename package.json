@@ -27,7 +27,7 @@
     "yup": "^1.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env HTTPS=true SSL_CRL_FILE=./certs/cert.crt SSL_KEY_FILE=./certs/cert.key react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
