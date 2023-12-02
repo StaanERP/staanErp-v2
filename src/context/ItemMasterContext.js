@@ -171,7 +171,7 @@ export const DataProvider = ({children})=>{
           console.error('Login Error:', error);
           const errorString = error.toString();
           if (errorString.includes("BrowserAuthError: interaction_in_progress")) {
-            toast.error('Try login new tab we will fix this error in next update ', {
+            toast.error('Close this tab open in new tab ', {
               position: "top-center",
               autoClose: 7000,
               hideProgressBar: true,
@@ -198,8 +198,12 @@ export const DataProvider = ({children})=>{
             setUserId('')
             Navigate("/")
             await msalInstance.logout();
-            await login();
             
+              // Close the current tab
+            // window.close();
+
+            // // Open a new tab (replace 'newtaburl' with the desired URL)
+            // window.open('newtaburl', '_blank');
           }
         } catch (error) {
           // Handle logout error
