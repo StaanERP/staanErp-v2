@@ -80,14 +80,28 @@ const EnquiryTable = () => {
              filter:false,
              flex:1,
              hide : true,
-             headerClass: 'center-header'
+             headerClass: 'center-header',
+             
             
         },
         {
             headerName:'Name' , field:'Name',  
        
             width: 150,
-            headerClass: 'center-header'
+            headerClass: 'center-header',
+            cellStyle: function(params) {
+              // Adjust the condition based on your requirements
+              if (params.data.status === 'Not Contacted') {
+                return { color: 'red' };
+              } else if (params.data.status === 'Converted') {
+                return { color: 'green' };
+              } else if (params.data.status === 'Junk') {
+                return { color: 'blue' };
+              } else {
+                // Default styling for other values
+                return null;
+              }
+            },
         },
         {
           headerName:'Status' , 
@@ -98,16 +112,17 @@ const EnquiryTable = () => {
           cellStyle: function(params) {
             // Adjust the condition based on your requirements
             if (params.value === 'Not Contacted') {
-              return { backgroundColor: '', color: 'red' };
+              return {   color: 'red' };
             } else if (params.value === 'Converted') {
-              return { backgroundColor: '', color: 'green' };
+              return {color: 'green' };
             } else if (params.value === 'Junk') {
-              return { backgroundColor: '', color: 'Yellow' };
+              return {color: 'blue' };
             } else {
               // Default styling for other values
               return null;
             }
           },
+      
        
           // cellEditorParams: {
           //   values: ['Not Contacted', 'Converted', 'Junk'],
@@ -117,7 +132,20 @@ const EnquiryTable = () => {
             headerName:'Organization' , 
             field:'OrganizationName',
             width: 200,
-            headerClass: 'center-header'
+            headerClass: 'center-header',
+            cellStyle: function(params) {
+              // Adjust the condition based on your requirements
+              if (params.data.status === 'Not Contacted') {
+                return { color: 'red' };
+              } else if (params.data.status === 'Converted') {
+                return { color: 'green' };
+              } else if (params.data.status === 'Junk') {
+                return { color: 'blue' };
+              } else {
+                // Default styling for other values
+                return null;
+              }
+            },
             
         },
         {
@@ -125,7 +153,20 @@ const EnquiryTable = () => {
           field:"Email",
           editable: false , 
           width: 200,
-          headerClass: 'center-header'
+          headerClass: 'center-header',
+          cellStyle: function(params) {
+            // Adjust the condition based on your requirements
+            if (params.data.status === 'Not Contacted') {
+              return { color: 'red' };
+            } else if (params.data.status === 'Converted') {
+              return { color: 'green' };
+            } else if (params.data.status === 'Junk') {
+              return { color: 'blue' };
+            } else {
+              // Default styling for other values
+              return null;
+            }
+          },
     
          
       },
@@ -133,38 +174,116 @@ const EnquiryTable = () => {
         headerName:'Mobile' , 
         field:"MobileNumber",
         editable: false , 
-        headerClass: 'center-header'
+        headerClass: 'center-header',
+        cellStyle: function(params) {
+          // Adjust the condition based on your requirements
+          if (params.data.status === 'Not Contacted') {
+            return { color: 'red' };
+          } else if (params.data.status === 'Converted') {
+            return { color: 'green' };
+          } else if (params.data.status === 'Junk') {
+            return { color: 'blue' };
+          } else {
+            // Default styling for other values
+            return null;
+          }
+        },
        
     },
     
     {
         headerName:'City' , 
         field:"Location",
-        headerClass: 'center-header'
+        headerClass: 'center-header',
+        cellStyle: function(params) {
+          // Adjust the condition based on your requirements
+          if (params.data.status === 'Not Contacted') {
+            return { color: 'red' };
+          } else if (params.data.status === 'Converted') {
+            return { color: 'green' };
+          } else if (params.data.status === 'Junk') {
+            return { color: 'blue' };
+          } else {
+            // Default styling for other values
+            return null;
+          }
+        },
     },
     {
         headerName:'Message' , 
         field:"message",
         editable: false , 
-        headerClass: 'center-header'
+        headerClass: 'center-header',
+        cellStyle: function(params) {
+          // Adjust the condition based on your requirements
+          if (params.data.status === 'Not Contacted') {
+            return { color: 'red' };
+          } else if (params.data.status === 'Converted') {
+            return { color: 'green' };
+          } else if (params.data.status === 'Junk') {
+            return { color: 'blue' };
+          } else {
+            // Default styling for other values
+            return null;
+          }
+        },
     },
     {
         headerName:'Conference' , 
         field:"con_name",
         editable: false , 
-        headerClass: 'center-header'
+        headerClass: 'center-header',
+        cellStyle: function(params) {
+          // Adjust the condition based on your requirements
+          if (params.data.status === 'Not Contacted') {
+            return { color: 'red' };
+          } else if (params.data.status === 'Converted') {
+            return { color: 'green' };
+          } else if (params.data.status === 'Junk') {
+            return { color: 'blue' };
+          } else {
+            // Default styling for other values
+            return null;
+          }
+        },
     },
     {
         headerName:'Interested' , 
         field: "intrested_products",
         editable: false , 
-        headerClass: 'center-header'
+        headerClass: 'center-header',
+        cellStyle: function(params) {
+          // Adjust the condition based on your requirements
+          if (params.data.status === 'Not Contacted') {
+            return { color: 'red' };
+          } else if (params.data.status === 'Converted') {
+            return { color: 'green' };
+          } else if (params.data.status === 'Junk') {
+            return { color: 'blue' };
+          } else {
+            // Default styling for other values
+            return null;
+          }
+        },
     },
     {
       headerName: 'Sales Person',
       field: 'salesmana_name',
       editable: false,
       headerClass: 'center-header',
+      cellStyle: function(params) {
+        // Adjust the condition based on your requirements
+        if (params.data.status === 'Not Contacted') {
+          return { color: 'red' };
+        } else if (params.data.status === 'Converted') {
+          return { color: 'green' };
+        } else if (params.data.status === 'Junk') {
+          return { color: 'blue' };
+        } else {
+          // Default styling for other values
+          return null;
+        }
+      },
       // filterFramework: CustomSelectFilter,
       // filterParams: {
       //   applyMiniFilterWhileTyping: true,
@@ -189,12 +308,38 @@ const EnquiryTable = () => {
   
         return formattedDate;
       },
+      cellStyle: function(params) {
+        // Adjust the condition based on your requirements
+        if (params.data.status === 'Not Contacted') {
+          return { color: 'red' };
+        } else if (params.data.status === 'Converted') {
+          return { color: 'green' };
+        } else if (params.data.status === 'Junk') {
+          return { color: 'blue' };
+        } else {
+          // Default styling for other values
+          return null;
+        }
+      },
     },
     {
       headerName:'Remarks' , 
       field: "Remarks",
       editable: false , 
-      headerClass: 'center-header'
+      headerClass: 'center-header',
+      cellStyle: function(params) {
+        // Adjust the condition based on your requirements
+        if (params.data.status === 'Not Contacted') {
+          return { color: 'red' };
+        } else if (params.data.status === 'Converted') {
+          return { color: 'green' };
+        } else if (params.data.status === 'Junk') {
+          return { color: 'blue' };
+        } else {
+          // Default styling for other values
+          return null;
+        }
+      },
     },
     
   
