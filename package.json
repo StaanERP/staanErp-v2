@@ -1,0 +1,53 @@
+{
+  "name": "staaperp_002",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@azure/msal-browser": "^3.5.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "ag-grid-react": "^30.2.1",
+    "axios": "^1.6.2",
+    "compromise": "^14.10.1",
+    "formik": "^2.4.5",
+    "jodit-react": "^1.3.39",
+    "mkcert": "^3.2.0",
+    "react": "^18.2.0",
+    "react-avatar": "^5.0.3",
+    "react-bootstrap": "^2.9.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
+    "react-toastify": "^9.1.3",
+    "swiper": "^11.0.5",
+    "tesseract.js": "^5.0.3",
+    "web-vitals": "^2.1.4",
+    "yup": "^1.3.2"
+  },
+  "scripts": {
+    "start": "cross-env HTTPS=true SSL_CRL_FILE=./certs/cert.crt SSL_KEY_FILE=./certs/cert.key react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
